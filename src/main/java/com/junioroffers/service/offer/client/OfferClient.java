@@ -21,7 +21,6 @@ public class OfferClient implements RemoteOfferClient {
 
 
     public List<OfferDto> getOffers() {
-        RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<HttpHeaders> headersHttpEntity = new HttpEntity<>(headers);
@@ -29,7 +28,7 @@ public class OfferClient implements RemoteOfferClient {
             ResponseEntity<List<OfferDto>> responseWithHttp = restTemplate.exchange(
                     url, HttpMethod.GET, headersHttpEntity,
                     new ParameterizedTypeReference<List<OfferDto>>() {});
-            List<OfferDto> responseWithHttpInFormAList = responseWithHttp.getBody();
+          final  List<OfferDto> responseWithHttpInFormAList = responseWithHttp.getBody();
             return (responseWithHttpInFormAList !=null) ? responseWithHttpInFormAList: Collections.emptyList();
         } catch (RestClientException e) {
             e.printStackTrace();

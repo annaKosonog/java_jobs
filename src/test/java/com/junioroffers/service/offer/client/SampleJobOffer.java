@@ -11,6 +11,9 @@ public abstract class SampleJobOffer {
                 .offerUrl(offerUrl)
                 .build();
     }
+    protected OfferDto emptyOffer(){
+        return new OfferDto();
+    }
 
 
     protected  String aZeroOffer(){
