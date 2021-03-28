@@ -21,6 +21,7 @@
     <properties>
         <java.version>1.8</java.version>
         <my.version>1.1.2-SNAPSHOT</my.version>
+        <log4j2Version>LATEST</log4j2Version>
     </properties>
 
     <dependencies>
@@ -50,6 +51,16 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2Version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2Version}</version>
         </dependency>
     </dependencies>
         <build>
