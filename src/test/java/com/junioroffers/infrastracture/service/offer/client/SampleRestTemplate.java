@@ -1,6 +1,6 @@
-package com.junioroffers.service.offer.client;
+package com.junioroffers.infrastracture.service.offer.client;
 
-import com.junioroffers.model.dto.OfferDto;
+import com.junioroffers.infrastracture.model.dto.OfferDto;
 import org.mockito.ArgumentMatchers;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;

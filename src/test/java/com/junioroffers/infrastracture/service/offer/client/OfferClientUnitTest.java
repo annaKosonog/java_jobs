@@ -1,6 +1,6 @@
-package com.junioroffers.service.offer.client;
+package com.junioroffers.infrastracture.service.offer.client;
 
-import com.junioroffers.model.dto.OfferDto;
+import com.junioroffers.infrastracture.model.dto.OfferDto;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;

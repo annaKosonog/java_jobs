@@ -1,6 +1,6 @@
-package com.junioroffers.service.offer.client;
+package com.junioroffers.infrastracture.service.offer.client;
 
-import com.junioroffers.model.dto.OfferDto;
+import com.junioroffers.infrastracture.model.dto.OfferDto;
 
 public abstract class SampleJobOffer {
     protected OfferDto aOfferDTo(String title, String company, String salary, String offerUrl) {

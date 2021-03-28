@@ -1,10 +1,9 @@
-package com.junioroffers.service.offer.client;
+package com.junioroffers.infrastracture.service.offer.client;
 
-import com.junioroffers.model.dto.OfferDto;
+import com.junioroffers.infrastracture.model.dto.OfferDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
