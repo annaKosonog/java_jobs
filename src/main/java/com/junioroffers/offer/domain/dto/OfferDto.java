@@ -11,6 +11,7 @@ import java.util.UUID;
 public class OfferDto {
     private UUID id;
     private String companyName;
+    private String position;
     private String salary;
-    private String urlOffers;
+    private String url;
 }
