@@ -21,11 +21,11 @@ public class OfferService {
     }
 
     public List<OfferDto> getOffers() {
-        final OfferDto cyberSourceDTO = offerMapper.mapToOfferDto(UUID.fromString("rfkofurijfiuoi324324324"),
-                "Software Engineer - Mobile (m/f/d",
+        final OfferDto cyberSourceDTO = offerMapper.mapToOfferDto(UUID.fromString("7b3e02b3-6b1a-4e75-bdad-cef5b279b074"),
+                "Software Engineer - Mobile (m/f/d)",
                 "Cybersource", "4k - 8k PLN",
                 "https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn");
-        final OfferDto cdqPolandDTO = offerMapper.mapToOfferDto(UUID.fromString("3324fjwjfhufhskjh"),
+        final OfferDto cdqPolandDTO = offerMapper.mapToOfferDto(UUID.fromString("24ee32b6-6b15-11eb-9439-0242ac130002"),
                 "Junior DevOps Engineer", "CDQ Poland",
                 "8k - 14k PLN", "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
         return Arrays.asList(cyberSourceDTO, cdqPolandDTO);
@@ -33,13 +33,13 @@ public class OfferService {
 
     public OfferDto getOfferById(long id) {
     if(id ==1L){
-        return  offerMapper.mapToOfferDto(UUID.fromString("rfkofurijfiuoi324324324"),
+        return  offerMapper.mapToOfferDto(UUID.fromString("7b3e02b3-6b1a-4e75-bdad-cef5b279b074"),
                 "Software Engineer - Mobile (m/f/d",
                 "Cybersource", "4k - 8k PLN",
                 "https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn");
     }
     else if (id ==2L){
-        return   offerMapper.mapToOfferDto(UUID.fromString("3324fjwjfhufhskjh"),
+        return   offerMapper.mapToOfferDto(UUID.fromString("24ee32b6-6b15-11eb-9439-0242ac130002"),
                     "Junior DevOps Engineer", "CDQ Poland",
                     "8k - 14k PLN", "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
         }

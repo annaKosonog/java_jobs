@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("offers")
+@RequestMapping("/offers")
 public class OfferController {
 
     private OfferService offerService;
