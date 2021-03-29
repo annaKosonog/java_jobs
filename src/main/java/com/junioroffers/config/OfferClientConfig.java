@@ -18,5 +18,7 @@ public class OfferClientConfig {
                 .setReadTimeout(Duration.ofMillis(readTimeout))
                 .build();
     }
+
+
 }
 

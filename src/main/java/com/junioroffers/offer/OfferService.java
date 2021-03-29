@@ -2,11 +2,13 @@ package com.junioroffers.offer;
 
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.exceptions.OfferErrorResponse;
+import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
 import com.junioroffers.offer.domain.mappers.OfferMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -41,6 +43,6 @@ public class OfferService {
                     "Junior DevOps Engineer", "CDQ Poland",
                     "8k - 14k PLN", "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
         }
-    throw  new OfferErrorResponse(id);
+    throw  new OfferNotFoundException(id);
     }
 }

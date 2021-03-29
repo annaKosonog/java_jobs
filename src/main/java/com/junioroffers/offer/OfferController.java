@@ -1,24 +1,36 @@
 package com.junioroffers.offer;
 
 import com.junioroffers.offer.domain.dto.OfferDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
+@RequestMapping("offers")
 public class OfferController {
 
-    @GetMapping("/offers")
-    public List<OfferDto> getOffers() {
-        return null;
+    private OfferService offerService;
+
+    @Autowired
+    public OfferController(OfferService offerService) {
+        this.offerService = offerService;
     }
 
-    @GetMapping("/offers/{id}")
-    public OfferDto getOfferById(@PathVariable UUID id ) {
-        return null;
+
+    @GetMapping
+    public ResponseEntity<List<OfferDto>> getOffers() {
+        return ResponseEntity.ok(offerService.getOffers());
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OfferDto> getOfferById(@PathVariable long id) {
+        return ResponseEntity.ok(offerService.getOfferById(id));
     }
 
 }
