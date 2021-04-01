@@ -8,7 +8,7 @@ import java.util.UUID;
 @Component
 public class OfferMapper {
 
-    public OfferDto mapToOfferDto (UUID id, String position, String companyName, String salary, String urlOffers){
+    public static OfferDto mapToOfferDto (UUID id, String position, String companyName, String salary, String urlOffers){
         return OfferDto.builder()
                 .id(id)
                 .position(position)
