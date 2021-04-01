@@ -14,18 +14,13 @@ import java.util.UUID;
 @Service
 public class OfferService {
 
-    private OfferMapper offerMapper;
-
-    public OfferService(OfferMapper offerMapper) {
-        this.offerMapper = offerMapper;
-    }
 
     public List<OfferDto> getOffers() {
-        final OfferDto cyberSourceDTO = offerMapper.mapToOfferDto(UUID.fromString("7b3e02b3-6b1a-4e75-bdad-cef5b279b074"),
+        final OfferDto cyberSourceDTO = OfferMapper.mapToOfferDto(UUID.fromString("7b3e02b3-6b1a-4e75-bdad-cef5b279b074"),
                 "Software Engineer - Mobile (m/f/d)",
                 "Cybersource", "4k - 8k PLN",
                 "https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn");
-        final OfferDto cdqPolandDTO = offerMapper.mapToOfferDto(UUID.fromString("24ee32b6-6b15-11eb-9439-0242ac130002"),
+        final OfferDto cdqPolandDTO = OfferMapper.mapToOfferDto(UUID.fromString("24ee32b6-6b15-11eb-9439-0242ac130002"),
                 "Junior DevOps Engineer", "CDQ Poland",
                 "8k - 14k PLN", "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
         return Arrays.asList(cyberSourceDTO, cdqPolandDTO);
@@ -33,13 +28,13 @@ public class OfferService {
 
     public OfferDto getOfferById(long id) {
     if(id ==1L){
-        return  offerMapper.mapToOfferDto(UUID.fromString("7b3e02b3-6b1a-4e75-bdad-cef5b279b074"),
-                "Software Engineer - Mobile (m/f/d",
+        return  OfferMapper.mapToOfferDto(UUID.fromString("7b3e02b3-6b1a-4e75-bdad-cef5b279b074"),
+                "Software Engineer - Mobile (m/f/d)",
                 "Cybersource", "4k - 8k PLN",
                 "https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn");
     }
     else if (id ==2L){
-        return   offerMapper.mapToOfferDto(UUID.fromString("24ee32b6-6b15-11eb-9439-0242ac130002"),
+        return   OfferMapper.mapToOfferDto(UUID.fromString("24ee32b6-6b15-11eb-9439-0242ac130002"),
                     "Junior DevOps Engineer", "CDQ Poland",
                     "8k - 14k PLN", "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
         }
