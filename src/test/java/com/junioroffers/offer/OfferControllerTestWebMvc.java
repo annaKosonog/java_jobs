@@ -3,6 +3,7 @@ package com.junioroffers.offer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.dto.SampleOffersDto;
+import com.junioroffers.offer.domain.exceptions.OfferControllerErrorHandler;
 import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,17 +52,29 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
     }
 
     @Test
-    void should_return_correct_message_during_found_offer_by_id_1(@Autowired MockMvc mockMvc) throws Exception {
-
+    void should_return_correct_message_during_found_offer_with_id_1(@Autowired MockMvc mockMvc) throws Exception {
+        final long id = 1;
         when(offerService.getOfferById(1L)).thenReturn(cyberSource());
-        MvcResult result = mockMvc.perform(get("/offers/{id}", 1)
+        MvcResult result = mockMvc.perform(get("/offers/{id}", id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
         String responseFromHttp = result.getResponse().getContentAsString();
         assertThat(responseFromHttp).contains("7b3e02b3-6b1a-4e75-bdad-cef5b279b074");
-        verify(offerService, times(1)).getOfferById(1L);
+        verify(offerService, times(1)).getOfferById(id);
+    }
+
+    @Test
+    void should_return_exception_when_could_not_found_offer_with_id_5(@Autowired MockMvc mockMvc) throws Exception {
+        final long id = 5L;
+
+        when(offerService.getOfferById(id)).thenThrow(new OfferNotFoundException(id));
+        mockMvc.perform(get("/offers/{id}", id)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+        verify(offerService, times(1)).getOfferById(id);
     }
 }
 
@@ -76,5 +89,10 @@ class MockMvcConfig implements SampleOffersDto {
     @Bean
     OfferController offerController(OfferService offerService) {
         return new OfferController(offerService);
+    }
+
+    @Bean
+    OfferControllerErrorHandler offerControllerErrorHandler() {
+        return new OfferControllerErrorHandler();
     }
 }
