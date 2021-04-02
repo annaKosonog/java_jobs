@@ -16,9 +16,7 @@ public interface SampleOffersDto {
     default OfferDto cdqPolandOffer() {
         return OfferMapper.mapToOfferDto(UUID.fromString("24ee32b6-6b15-11eb-9439-0242ac130002"),
                 "Junior DevOps Engineer",
-                "8k - 14k PLN",
-                "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd",
-                "CDQ Poland"
-        );
+                "CDQ Poland","8k - 14k PLN",
+                "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
     }
 }
