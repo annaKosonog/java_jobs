@@ -29,7 +29,7 @@ public class OfferServiceTest implements SampleOffersDto {
         //when
         final List<OfferDto> allOffers = offerService.getOffers();
         //then
-        assertThat(allOffers).isSameAs(expectedList());
+        assertThat(allOffers).isEqualTo(expectedList());
     }
 
     @Test
@@ -56,6 +56,22 @@ public class OfferServiceTest implements SampleOffersDto {
         assertEquals("4k - 8k PLN", actual.getSalary());
         assertEquals("https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn", actual.getUrl());
     }
+
+    @Test
+    void should_return_offer_with_id_2() {
+        //given
+        long id = 2L;
+        OfferService offerService = new OfferService();
+        //when
+        final OfferDto actual = offerService.getOfferById(id);
+        //then
+        assertEquals("24ee32b6-6b15-11eb-9439-0242ac130002", actual.getId().toString());
+        assertEquals("Junior DevOps Engineer", actual.getPosition());
+        assertEquals("CDQ Poland", actual.getCompanyName());
+        assertEquals("8k - 14k PLN", actual.getSalary());
+        assertEquals("https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd", actual.getUrl());
+    }
+
 
     @Test
     void should_throws_exception_when_offer_by_id_5() {

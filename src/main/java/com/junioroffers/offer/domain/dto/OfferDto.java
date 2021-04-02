@@ -9,6 +9,7 @@ import java.util.UUID;
 
 @Builder
 @Getter
+@EqualsAndHashCode
 public class OfferDto {
     private UUID id;
     private String companyName;
