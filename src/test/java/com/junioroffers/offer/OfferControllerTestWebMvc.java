@@ -27,8 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest
 @ContextConfiguration(classes = MockMvcConfig.class)
-//@SpringBootTest
-//@AutoConfigureMockMvc
 public class OfferControllerTestWebMvc implements SampleOffersDto {
 
     @Autowired
@@ -52,7 +50,7 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
     }
 
     @Test
-    void should_return_correct_message_during_found_offer_with_id_1(@Autowired MockMvc mockMvc) throws Exception {
+    void should_return_correct_message_during_found_offer_with_id_one(@Autowired MockMvc mockMvc) throws Exception {
         final long id = 1;
         when(offerService.getOfferById(1L)).thenReturn(cyberSource());
         MvcResult result = mockMvc.perform(get("/offers/{id}", id)
@@ -66,7 +64,7 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
     }
 
     @Test
-    void should_return_exception_when_could_not_found_offer_with_id_5(@Autowired MockMvc mockMvc) throws Exception {
+    void should_return_exception_when_could_not_found_offer_with_id_five(@Autowired MockMvc mockMvc) throws Exception {
         final long id = 5L;
 
         when(offerService.getOfferById(id)).thenThrow(new OfferNotFoundException(id));

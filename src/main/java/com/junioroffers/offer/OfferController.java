@@ -1,12 +1,12 @@
 package com.junioroffers.offer;
 
 import com.junioroffers.offer.domain.dto.OfferDto;
-import com.junioroffers.offer.domain.exceptions.OfferControllerErrorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
@@ -26,8 +26,9 @@ public class OfferController {
     public ResponseEntity<List<OfferDto>> getOffers() {
         return ResponseEntity.ok(offerService.getOffers());
     }
+
     @GetMapping(value = "/{id}")
-    public ResponseEntity<OfferDto> getOfferById(@PathVariable long id)  {
+    public ResponseEntity<OfferDto> getOfferById(@PathVariable long id) {
         return ResponseEntity.ok(offerService.getOfferById(id));
     }
 

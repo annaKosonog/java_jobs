@@ -1,6 +1,7 @@
 package com.junioroffers.offer.domain.dto;
 
 import com.junioroffers.offer.domain.mappers.OfferMapper;
+
 import java.util.UUID;
 
 public interface SampleOffersDto {
@@ -16,7 +17,7 @@ public interface SampleOffersDto {
     default OfferDto cdqPolandOffer() {
         return OfferMapper.mapToOfferDto(UUID.fromString("24ee32b6-6b15-11eb-9439-0242ac130002"),
                 "Junior DevOps Engineer",
-                "CDQ Poland","8k - 14k PLN",
+                "CDQ Poland", "8k - 14k PLN",
                 "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
     }
 }

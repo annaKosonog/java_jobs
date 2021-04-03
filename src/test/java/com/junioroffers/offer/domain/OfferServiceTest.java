@@ -5,17 +5,16 @@ import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.dto.SampleOffersDto;
 import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.Arrays;
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith(MockitoExtension.class)
 public class OfferServiceTest implements SampleOffersDto {
 
     final List<OfferDto> expectedList() {
@@ -33,7 +32,7 @@ public class OfferServiceTest implements SampleOffersDto {
     }
 
     @Test
-    void should_return_find_all_offers(){
+    void should_return_find_all_offers() {
         //given
         OfferService offerService = new OfferService();
         //when
@@ -43,7 +42,7 @@ public class OfferServiceTest implements SampleOffersDto {
     }
 
     @Test
-    void should_return_offer_with_id_1() {
+    void should_return_offer_with_id_one() {
         //given
         long id = 1L;
         OfferService offerService = new OfferService();
@@ -58,7 +57,7 @@ public class OfferServiceTest implements SampleOffersDto {
     }
 
     @Test
-    void should_return_offer_with_id_2() {
+    void should_return_offer_with_id_two() {
         //given
         long id = 2L;
         OfferService offerService = new OfferService();
@@ -74,7 +73,7 @@ public class OfferServiceTest implements SampleOffersDto {
 
 
     @Test
-    void should_throws_exception_when_offer_by_id_5() {
+    void should_throws_exception_when_offer_by_id_five() {
         //given
         //when
         final long id = 5L;
