@@ -11,8 +11,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 import java.util.List;
 
-
-@Service
 @AllArgsConstructor
 public class OfferClient implements RemoteOfferClient {
 
