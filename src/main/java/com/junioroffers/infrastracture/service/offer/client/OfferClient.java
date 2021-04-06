@@ -1,6 +1,6 @@
-package com.junioroffers.service.offer.client;
+package com.junioroffers.infrastracture.service.offer.client;
 
-import com.junioroffers.model.dto.OfferDto;
+import com.junioroffers.infrastracture.model.dto.OfferDto;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -11,8 +11,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 import java.util.List;
 
-
-@Service
 @AllArgsConstructor
 public class OfferClient implements RemoteOfferClient {
 

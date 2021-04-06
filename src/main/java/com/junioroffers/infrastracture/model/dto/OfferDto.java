@@ -1,4 +1,4 @@
-package com.junioroffers.model.dto;
+package com.junioroffers.infrastracture.model.dto;
 
 import lombok.*;
 

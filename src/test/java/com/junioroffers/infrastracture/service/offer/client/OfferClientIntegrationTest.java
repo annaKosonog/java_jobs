@@ -1,4 +1,4 @@
-package com.junioroffers.service.offer.client;
+package com.junioroffers.infrastracture.service.offer.client;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -58,7 +58,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(aOneOfferJSON())));
-        then(service.getOffers()).containsOnlyElementsOf(Collections.singletonList(aCybersource()));
+        then(service.getOffers()).containsExactlyElementsOf(Collections.singletonList(aCybersource()));
     }
 
     @Test
