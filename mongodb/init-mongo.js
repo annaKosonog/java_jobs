@@ -1,12 +1,11 @@
 
 print('Start ##########################################################');
-
-db = db.getSiblingDB('offer');
+db = db.getSiblingDB('offers');
 db.createUser(
     {
         user: "root",
         pwd: "root",
-        roles: [{role:"readWrite", db: "offer"}]
+        roles: [{role:"readWrite", db: "offers"}]
     }
 );
 
