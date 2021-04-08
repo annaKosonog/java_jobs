@@ -1,4 +1,4 @@
-package com.junioroffers.mongodb.config;
+package com.junioroffers.mongo.config;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 @ChangeLog(order = "1")
 public class DatabaseChangeLog {
 
-    @ChangeSet(order = "001", id = "dataBase", author = "root")
+    @ChangeSet(order = "001", id = "dataBase", author = "Sai")
     public void dataBase(OfferRepository offerRepository) {
         offerRepository.insert(Arrays.asList(cyberSource(), cdqPoland()));
     }

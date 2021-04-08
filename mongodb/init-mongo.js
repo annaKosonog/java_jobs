@@ -1,6 +1,5 @@
 
 print('Start ##########################################################');
-db = db.getSiblingDB('offers');
 db.createUser(
     {
         user: "root",
