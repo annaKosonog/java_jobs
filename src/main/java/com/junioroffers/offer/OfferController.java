@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class OfferController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<OfferDto> getOfferById(@PathVariable long id) {
+    public ResponseEntity<OfferDto> getOfferById(@PathVariable String id) {
         return ResponseEntity.ok(offerService.getOfferById(id));
     }
 
