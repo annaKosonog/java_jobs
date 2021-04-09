@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/offers")
 public class OfferController {
 
-    private OfferService offerService;
+    private final OfferService offerService;
 
     @Autowired
     public OfferController(OfferService offerService) {
@@ -25,12 +25,12 @@ public class OfferController {
 
     @GetMapping
     public ResponseEntity<List<OfferDto>> getOffers() {
-        return ResponseEntity.ok(offerService.getOffers());
+        return ResponseEntity.ok(offerService.findAllOffers());
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<OfferDto> getOfferById(@PathVariable String id) {
-        return ResponseEntity.ok(offerService.getOfferById(id));
+        return ResponseEntity.ok(offerService.findOfferById(id));
     }
 
 }

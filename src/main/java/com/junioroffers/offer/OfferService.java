@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OfferService {
 
-    private OfferRepository offerRepository;
+    private final OfferRepository offerRepository;
 
-    public List<OfferDto> getOffers() {
+    public List<OfferDto> findAllOffers() {
 
         return offerRepository.findAll()
                 .stream()
@@ -23,7 +23,7 @@ public class OfferService {
                 .collect(Collectors.toList());
     }
 
-    public OfferDto getOfferById(String id) {
+    public OfferDto findOfferById(String id) {
         return offerRepository.findById(id)
                 .map(OfferMapper::mapToOfferDto)
                 .orElseThrow(() -> new OfferNotFoundException("Could not find offers id %d !!!" + id));

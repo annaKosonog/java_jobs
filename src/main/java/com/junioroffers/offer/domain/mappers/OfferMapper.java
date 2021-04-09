@@ -10,8 +10,8 @@ public class OfferMapper {
     public static OfferDto mapToOfferDto(Offer from) {
         return OfferDto.builder()
                 .id(from.getId())
-                .position(from.getPosition())
                 .companyName(from.getCompanyName())
+                .position(from.getPosition())
                 .salary(from.getSalary())
                 .offerUrl(from.getOfferUrl())
                 .build();
