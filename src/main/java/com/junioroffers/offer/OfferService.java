@@ -26,6 +26,6 @@ public class OfferService {
     public OfferDto findOfferById(String id) {
         return offerRepository.findById(id)
                 .map(OfferMapper::mapToOfferDto)
-                .orElseThrow(() -> new OfferNotFoundException("Could not find offers id %d !!!" + id));
+                .orElseThrow(() -> new OfferNotFoundException(id));
     }
 }
