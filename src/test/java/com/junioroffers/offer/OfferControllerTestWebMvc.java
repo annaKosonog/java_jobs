@@ -4,23 +4,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.dto.SampleOffersDto;
 import com.junioroffers.offer.domain.exceptions.OfferControllerErrorHandler;
-import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
+import com.junioroffers.offer.domain.exceptions.OfferErrorResponse;
+import com.junioroffers.offer.domain.exceptions.SampleOfferNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,59 +30,71 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = MockMvcConfig.class)
 public class OfferControllerTestWebMvc implements SampleOffersDto {
 
-    @Autowired
-    private OfferService offerService;
-
     @Test
     void should_return_correct_message_during_found_all_offers(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
-  //      final List<OfferDto> responseHttp = Arrays.asList(cyberSource(), cdqPolandOffer());
-  //      String expectedResponse = objectMapper.writeValueAsString(responseHttp);
+        final List<OfferDto> responseHttp = Arrays.asList(cyberSourceDto(), cdqPolandDto());
+        String expectedResponse = objectMapper.writeValueAsString(responseHttp);
 
-  //      when(offerService.findAllOffers()).thenReturn(responseHttp);
 
         MvcResult result = mockMvc.perform(get("/offers")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(MockMvcResultHandlers.print())
+                .andDo(print())
                 .andReturn();
 
-        String actualResponseBody = result.getResponse().getContentAsString();
-    //    assertThat(actualResponseBody).isEqualTo(expectedResponse);
+        final String actualResponseBody = result.getResponse().getContentAsString();
+        assertThat(actualResponseBody.equals(expectedResponse));
     }
 
     @Test
-    void should_return_correct_message_during_found_offer_with_id_one(@Autowired MockMvc mockMvc) throws Exception {
-        final long id = 1;
-  //      when(offerService.findOfferById(1L)).thenReturn(cyberSource());
+    void should_return_correct_message_during_found_offer_with_id(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
+        final String id = "7b3e02b3-6b1a-4e75-bdad-cef5b279b074";
+        String expectedResponse = objectMapper.writeValueAsString(cyberSourceDto());
+
         MvcResult result = mockMvc.perform(get("/offers/{id}", id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
-        String responseFromHttp = result.getResponse().getContentAsString();
-        assertThat(responseFromHttp).contains("7b3e02b3-6b1a-4e75-bdad-cef5b279b074");
-      //  verify(offerService, times(1)).findOfferById(id);
+        String actualResponseBody = result.getResponse().getContentAsString();
+        assertThat(actualResponseBody).isEqualTo(expectedResponse);
+
     }
 
     @Test
-    void should_return_exception_when_could_not_found_offer_with_id_five(@Autowired MockMvc mockMvc) throws Exception {
-        final long id = 5L;
+    void should_return_exception_when_could_not_found_offer_with_id_five(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
+        final String ID = "100";
+        OfferErrorResponse offerErrorResponse = new OfferErrorResponse(HttpStatus.NOT_FOUND, "Offer not found id: " + ID);
+        String expectedResponse = objectMapper.writeValueAsString(offerErrorResponse);
 
-   //     when(offerService.findOfferById(id)).thenThrow(new OfferNotFoundException(id));
-        mockMvc.perform(get("/offers/{id}", id)
-                .accept(MediaType.APPLICATION_JSON))
+        final MvcResult result = mockMvc.perform(get("/offers/100"))
                 .andExpect(status().isNotFound())
-                .andDo(print());
-      //  verify(offerService, times(1)).findOfferById(id);
+                .andReturn();
+        String actualResponseBody = result.getResponse().getContentAsString();
+        assertThat(actualResponseBody).isEqualTo(expectedResponse);
     }
 }
 
 @Configuration(proxyBeanMethods = false)
-class MockMvcConfig implements SampleOffersDto {
+class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
 
     @Bean
     OfferService offerService() {
-        return mock(OfferService.class);
+        OfferRepository offerRepository = mock(OfferRepository.class);
+        return new OfferService(offerRepository) {
+            public List<OfferDto> findAlOlOffers() {
+                return Arrays.asList(cyberSourceDto(), cdqPolandDto());
+            }
+
+            public OfferDto findOfferById(String id) {
+                if (id.equals("7b3e02b3-6b1a-4e75-bdad-cef5b279b074")) {
+                    return cyberSourceDto();
+                } else if (id.equals("24ee32b6-6b15-11eb-9439-0242ac130002")) {
+                    return cdqPolandDto();
+                }
+                throw sampleOfferNotFoundException(id);
+            }
+        };
     }
 
     @Bean

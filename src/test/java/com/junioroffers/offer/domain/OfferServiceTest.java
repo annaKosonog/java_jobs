@@ -8,6 +8,7 @@ import com.junioroffers.offer.domain.dto.SampleOffersDto;
 import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -43,32 +44,32 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
         //given
         when(offerRepository.findAll()).thenReturn(Arrays.asList(cyberSourceDao(), cdqPolandDao()));
         //when
-           final List<OfferDto> allOffers = offerService.findAllOffers();
+        final List<OfferDto> allOffers = offerService.findAllOffers();
         //then
-           assertThat(allOffers, hasSize(2));
+        assertThat(allOffers, hasSize(2));
     }
 
 
     @Test
     void should_return_offer_with_id_one() {
         //given
-        final String  id = "7b3e02b3-6b1a-4e75-bdad-cef5b279b074";
+        final String id = "7b3e02b3-6b1a-4e75-bdad-cef5b279b074";
         when(offerRepository.findById(id)).thenReturn(Optional.of(cyberSourceDao()));
         //when
-            final OfferDto actual = offerService.findOfferById(id);
+        final OfferDto actual = offerService.findOfferById(id);
         //then
-           assertEquals("7b3e02b3-6b1a-4e75-bdad-cef5b279b074", actual.getId());
-           assertEquals("Software Engineer - Mobile (m/f/d)", actual.getCompanyName());
-           assertEquals("Cybersource", actual.getPosition());
-           assertEquals("4k - 8k PLN", actual.getSalary());
-          assertEquals("https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn", actual.getOfferUrl());
+        assertEquals("7b3e02b3-6b1a-4e75-bdad-cef5b279b074", actual.getId());
+        assertEquals("Software Engineer - Mobile (m/f/d)", actual.getCompanyName());
+        assertEquals("Cybersource", actual.getPosition());
+        assertEquals("4k - 8k PLN", actual.getSalary());
+        assertEquals("https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn", actual.getOfferUrl());
     }
 
     @Test
     void should_return_offer_with_id_two() {
         //given
-       final  String id = "24ee32b6-6b15-11eb-9439-0242ac130002";
-       when(offerRepository.findById(id)).thenReturn(Optional.of(cdqPolandDao()));
+        final String id = "24ee32b6-6b15-11eb-9439-0242ac130002";
+        when(offerRepository.findById(id)).thenReturn(Optional.of(cdqPolandDao()));
 
         //when
         final OfferDto actual = offerService.findOfferById(id);
@@ -88,7 +89,7 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
         final String id = "100";
         when(offerRepository.findById(id)).thenReturn(Optional.empty());
         //then
-        assertThrows(OfferNotFoundException.class, ()-> offerService.findOfferById(id));
+        assertThrows(OfferNotFoundException.class, () -> offerService.findOfferById(id));
     }
 
 }
