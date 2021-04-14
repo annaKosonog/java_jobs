@@ -4,6 +4,7 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.junioroffers.offer.OfferRepository;
 import com.junioroffers.offer.domain.dao.Offer;
+
 import java.util.Arrays;
 
 @ChangeLog(order = "1")

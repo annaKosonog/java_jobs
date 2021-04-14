@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/offers")
 public class OfferController {
 
-    private OfferService offerService;
+     OfferService offerService;
 
     @Autowired
     public OfferController(OfferService offerService) {
@@ -24,12 +25,12 @@ public class OfferController {
 
     @GetMapping
     public ResponseEntity<List<OfferDto>> getOffers() {
-        return ResponseEntity.ok(offerService.getOffers());
+        return ResponseEntity.ok(offerService.findAllOffers());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<OfferDto> getOfferById(@PathVariable long id) {
-        return ResponseEntity.ok(offerService.getOfferById(id));
+    public ResponseEntity<OfferDto> getOfferById(@PathVariable String id) {
+        return ResponseEntity.ok(offerService.findOfferById(id));
     }
 
 }

@@ -1,6 +1,9 @@
 package com.junioroffers.offer.domain.dao;
 
+
+
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Document(collection = "offers")
 public class Offer {
 
