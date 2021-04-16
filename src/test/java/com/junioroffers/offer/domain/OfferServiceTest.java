@@ -56,8 +56,8 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
         final OfferDto actual = offerService.findOfferById(id);
         //then
         assertEquals("7b3e02b3-6b1a-4e75-bdad-cef5b279b074", actual.getId());
-        assertEquals("Software Engineer - Mobile (m/f/d)", actual.getCompanyName());
-        assertEquals("Cybersource", actual.getPosition());
+        assertEquals("Software Engineer - Mobile (m/f/d)", actual.getPosition());
+        assertEquals("Cybersource", actual.getCompanyName());
         assertEquals("4k - 8k PLN", actual.getSalary());
         assertEquals("https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn", actual.getOfferUrl());
     }
@@ -72,8 +72,8 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
         final OfferDto actual = offerService.findOfferById(id);
         //then
         assertEquals("24ee32b6-6b15-11eb-9439-0242ac130002", actual.getId());
-        assertEquals("Junior DevOps Engineer", actual.getCompanyName());
-        assertEquals("CDQ Poland", actual.getPosition());
+        assertEquals("Junior DevOps Engineer", actual.getPosition());
+        assertEquals("CDQ Poland", actual.getCompanyName());
         assertEquals("8k - 14k PLN", actual.getSalary());
         assertEquals("https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd", actual.getOfferUrl());
     }
