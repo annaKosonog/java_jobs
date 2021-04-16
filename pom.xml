@@ -11,17 +11,20 @@
         </parent>
     <groupId>pl.akademia</groupId>
     <artifactId>java_jobs</artifactId>
-    <version>${my.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
         <java.version>1.8</java.version>
-        <my.version>1.1.2-SNAPSHOT</my.version>
         <wiremock-jre8.version>2.27.2</wiremock-jre8.version>
-        <spring-data-mongodb.version>3.1.3</spring-data-mongodb.version>
-        <mongodb-driver-sync.version>4.2.2</mongodb-driver-sync.version>
-        <mongock-bom.version>4.3.4</mongock-bom.version>
         <hamcrest-library.version>1.3</hamcrest-library.version>
+        <mongock-bom.version>4.3.4</mongock-bom.version>
+        <mongodb-driver-sync.version>4.2.3</mongodb-driver-sync.version>
+        <mongodb-driver-core.version>4.2.3</mongodb-driver-core.version>
+        <mongodb-bson.version>4.2.3</mongodb-bson.version>
+        <spring-data-mongodb.version>3.1.3</spring-data-mongodb.version>
+        <testcontainers.mongodb.version>1.15.2</testcontainers.mongodb.version>
+        <testcontainers-junit-jupiter.version>1.15.2</testcontainers-junit-jupiter.version>
     </properties>
 
     <dependencies>
@@ -40,6 +43,18 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
             <version>${mongodb-driver-sync.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-core</artifactId>
+            <version>${mongodb-driver-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>${mongodb-bson.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat -->
@@ -77,6 +92,18 @@
         <dependency>
             <groupId>com.github.cloudyrock.mongock</groupId>
             <artifactId>mongock-spring-v5</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mongodb</artifactId>
+            <version>${testcontainers.mongodb.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${testcontainers-junit-jupiter.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <dependencyManagement>
