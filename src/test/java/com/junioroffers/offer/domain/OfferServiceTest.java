@@ -28,33 +28,33 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
 
     @Test
     void should_return_all_offers() {
-        //given
+        //GIVEN
         when(offerRepository.findAll()).thenReturn(Arrays.asList(cyberSourceDao(), cdqPolandDao()));
-        //when
+        //WHEN
         final List<OfferDto> allOffers = offerService.findAllOffers();
-        //then
+        //THEN
         assertThat(allOffers).isEqualTo(Arrays.asList(cyberSourceDto(), cdqPolandDto()));
     }
 
     @Test
     void should_return_find_all_offers() {
-        //given
+        //GIVEN
         when(offerRepository.findAll()).thenReturn(Arrays.asList(cyberSourceDao(), cdqPolandDao()));
-        //when
+        //WHEN
         final List<OfferDto> allOffers = offerService.findAllOffers();
-        //then
+        //THEN
         assertThat(allOffers, hasSize(2));
     }
 
 
     @Test
     void should_return_offer_with_id_one() {
-        //given
+        //GIVEN
         final String id = "7b3e02b3-6b1a-4e75-bdad-cef5b279b074";
         when(offerRepository.findById(id)).thenReturn(Optional.of(cyberSourceDao()));
-        //when
+        //WHEN
         final OfferDto actual = offerService.findOfferById(id);
-        //then
+        //THEN
         assertEquals("7b3e02b3-6b1a-4e75-bdad-cef5b279b074", actual.getId());
         assertEquals("Software Engineer - Mobile (m/f/d)", actual.getPosition());
         assertEquals("Cybersource", actual.getCompanyName());
@@ -64,13 +64,12 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
 
     @Test
     void should_return_offer_with_id_two() {
-        //given
+        //GIVEN
         final String id = "24ee32b6-6b15-11eb-9439-0242ac130002";
         when(offerRepository.findById(id)).thenReturn(Optional.of(cdqPolandDao()));
-
-        //when
+        //WHEN
         final OfferDto actual = offerService.findOfferById(id);
-        //then
+        //THEN
         assertEquals("24ee32b6-6b15-11eb-9439-0242ac130002", actual.getId());
         assertEquals("Junior DevOps Engineer", actual.getPosition());
         assertEquals("CDQ Poland", actual.getCompanyName());
@@ -81,12 +80,11 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
 
     @Test
     void should_throws_exception_when_offer_by_id_five() {
-        //given
-        //when
+        //GIVEN
+        //WHEN
         final String id = "100";
         when(offerRepository.findById(id)).thenReturn(Optional.empty());
-        //then
+        //THEN
         assertThrows(OfferNotFoundException.class, () -> offerService.findOfferById(id));
     }
-
 }

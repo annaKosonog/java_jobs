@@ -47,5 +47,17 @@ public class OfferServiceWithContainerTests implements SampleOffers, SampleOffer
         Assert.assertEquals(actualOffers, Arrays.asList(cyberSourceDto(), cdqPolandDto()));
     }
 
+    @Test
+    void should_return_offer_from_the_database_after_the_id(@Autowired OfferRepository offerRepository,
+                                                            @Autowired OfferService offerService) {
+        //GIVEN
+        final String ID = "7b3e02b3-6b1a-4e75-bdad-cef5b279b074";
+        then(offerRepository.findById(ID)).isPresent();
+        //WHEN
+        final OfferDto actual = offerService.findOfferById(ID);
+        //THEN
+        Assert.assertEquals(actual, cyberSourceDto());
+    }
+
 
 }
