@@ -17,6 +17,7 @@ public class DatabaseChangeLog {
 
     private Offer cyberSource() {
         final Offer cybersource = new Offer();
+        cybersource.setId("7b3e02b3-6b1a-4e75-bdad-cef5b279b074");
         cybersource.setOfferUrl("https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn");
         cybersource.setPosition("Software Engineer - Mobile (m/f/d)");
         cybersource.setSalary("4k - 8k PLN");
@@ -25,11 +26,12 @@ public class DatabaseChangeLog {
     }
 
     private Offer cdqPoland() {
-        final Offer cybersource = new Offer();
-        cybersource.setOfferUrl("https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
-        cybersource.setPosition("Junior DevOps Engineer");
-        cybersource.setSalary("8k - 14k PLN");
-        cybersource.setCompanyName("CDQ Poland");
-        return cybersource;
+        final Offer cdqSource = new Offer();
+        cdqSource.setId("24ee32b6-6b15-11eb-9439-0242ac130002");
+        cdqSource.setOfferUrl("https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
+        cdqSource.setPosition("Junior DevOps Engineer");
+        cdqSource.setSalary("8k - 14k PLN");
+        cdqSource.setCompanyName("CDQ Poland");
+        return cdqSource;
     }
 }
