@@ -1,5 +1,6 @@
 package com.junioroffers.offer;
 
+import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
 import com.junioroffers.offer.domain.mappers.OfferMapper;
@@ -27,5 +28,9 @@ public class OfferService {
         return offerRepository.findById(id)
                 .map(OfferMapper::mapToOfferDto)
                 .orElseThrow(() -> new OfferNotFoundException(id));
+    }
+
+    public List<Offer> saveAll(List<Offer> offersList) {
+       return offerRepository.saveAll(offersList);
     }
 }
