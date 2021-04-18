@@ -5,7 +5,6 @@ import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dao.SampleOffers;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.dto.SampleOffersDto;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
+import static org.junit.Assert.assertEquals;
 
 
 @SpringBootTest(classes = JobOffersApplication.class)
@@ -44,7 +44,7 @@ public class OfferServiceWithContainerTests implements SampleOffers, SampleOffer
         //WHEN
         final List<OfferDto> actualOffers = offerService.findAllOffers();
         //THEN
-        Assert.assertEquals(actualOffers, Arrays.asList(cyberSourceDto(), cdqPolandDto()));
+        assertEquals(actualOffers, Arrays.asList(cyberSourceDto(), cdqPolandDto()));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class OfferServiceWithContainerTests implements SampleOffers, SampleOffer
         //WHEN
         final OfferDto actual = offerService.findOfferById(ID);
         //THEN
-        Assert.assertEquals(actual, cyberSourceDto());
+        assertEquals(actual, cyberSourceDto());
     }
 
 
