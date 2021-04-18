@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -64,7 +63,7 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
     @Test
     void should_return_exception_when_could_not_found_offer_with_id_five(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
         final String ID = "100";
-        OfferErrorResponse offerErrorResponse = new OfferErrorResponse(HttpStatus.NOT_FOUND, "Offer not found id: " + ID);
+        OfferErrorResponse offerErrorResponse = new OfferErrorResponse(HttpStatus.NOT_FOUND, "Could not find offers id: " + ID);
         String expectedResponse = objectMapper.writeValueAsString(offerErrorResponse);
 
         final MvcResult result = mockMvc.perform(get("/offers/100"))
@@ -75,17 +74,12 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
     }
 }
 
-@Configuration(proxyBeanMethods = false)
 class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
 
     @Bean
     OfferService offerService() {
         OfferRepository offerRepository = mock(OfferRepository.class);
         return new OfferService(offerRepository) {
-            public List<OfferDto> findAlOlOffers() {
-                return Arrays.asList(cyberSourceDto(), cdqPolandDto());
-            }
-
             public OfferDto findOfferById(String id) {
                 if (id.equals("7b3e02b3-6b1a-4e75-bdad-cef5b279b074")) {
                     return cyberSourceDto();
