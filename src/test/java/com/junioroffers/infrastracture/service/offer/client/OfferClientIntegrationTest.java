@@ -9,9 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.util.SocketUtils;
 import org.springframework.web.client.RestTemplate;
+
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
+
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.BDDAssertions.then;
 

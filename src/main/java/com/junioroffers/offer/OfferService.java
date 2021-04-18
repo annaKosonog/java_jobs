@@ -31,6 +31,6 @@ public class OfferService {
     }
 
     public List<Offer> saveAll(List<Offer> offersList) {
-       return offerRepository.saveAll(offersList);
+        return offerRepository.saveAll(offersList);
     }
 }
