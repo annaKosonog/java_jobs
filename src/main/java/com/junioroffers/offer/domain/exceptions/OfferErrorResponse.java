@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class OfferErrorResponse  {
+public class OfferErrorResponse {
 
     public final HttpStatus status;
     public final String message;

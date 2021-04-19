@@ -1,7 +1,6 @@
 package com.junioroffers.offer.domain.dao;
 
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

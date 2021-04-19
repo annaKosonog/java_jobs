@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -16,44 +18,38 @@ public class OfferClientUnitTest extends SampleOfferResponse implements SampleRe
 
     @Test
     public void should_return_empty_list_of_offers() {
-        // given
+        // GIVEN
         ResponseEntity<List<OfferDto>> responseEntity = responseWithNoOffers();
         when(getExchange(restTemplate))
                 .thenReturn(responseEntity);
-
-        // when
+        // WHEN
         final List<OfferDto> offers = offerClient.getOffers();
-
-        // then
+        // THEN
         assertThat(offers.size()).isEqualTo(0);
     }
 
     @Test
     public void should_return_one_element_list_of_offers() {
-        // given
+        // GIVEN
         ResponseEntity<List<OfferDto>> responseEntity = responseWithOneOffer();
         when(getExchange(restTemplate))
                 .thenReturn(responseEntity);
-
-        // when
+        // WHEN
         List<OfferDto> offers = offerClient.getOffers();
-
-        // then
+        //THEN
         assertThat(offers.size()).isEqualTo(1);
     }
 
 
     @Test
     public void should_return_two_offers() {
-        // given
+        //GIVEN
         ResponseEntity<List<OfferDto>> responseEntity = responseWithOffers(emptyOffer(), emptyOffer());
         when(getExchange(restTemplate))
                 .thenReturn(responseEntity);
-
-        // when
+        //WHEN
         final List<OfferDto> offers = offerClient.getOffers();
-
-        // then
+        //THEN
         assertThat(offers.size()).isEqualTo(2);
     }
 }
