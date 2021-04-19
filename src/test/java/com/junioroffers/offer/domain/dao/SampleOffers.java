@@ -6,7 +6,7 @@ public interface SampleOffers {
         return new Offer(id, companyName, position, salary, offerUrl);
     }
 
-    default Offer bOffers(String companyName, String position, String salary, String offerUrl) {
+    default Offer theOffers(String companyName, String position, String salary, String offerUrl) {
         final Offer offer = new Offer();
         offer.setCompanyName(companyName);
         offer.setPosition(position);
@@ -16,7 +16,7 @@ public interface SampleOffers {
     }
 
     default Offer aCrosswordCyberSecurity() {
-        return bOffers(
+        return theOffers(
                 "Crossword Cybersecurity",
                 "Junior Java Developer",
                 "6k - 8k PLN",
@@ -24,7 +24,7 @@ public interface SampleOffers {
     }
 
     default Offer aSages() {
-        return bOffers(
+        return theOffers(
                 "Crossword Cybersecurity",
                 "Java Developer",
                 "7k - 10k PLN",
