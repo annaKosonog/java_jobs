@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class OfferDto {
+public class JobOfferDto {
     String title;
     String company;
     String salary;
