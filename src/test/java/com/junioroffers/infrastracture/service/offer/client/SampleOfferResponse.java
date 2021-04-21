@@ -1,6 +1,6 @@
 package com.junioroffers.infrastracture.service.offer.client;
 
-import com.junioroffers.infrastracture.model.dto.OfferDto;
+import com.junioroffers.infrastracture.model.dto.JobOfferDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -10,15 +10,15 @@ import java.util.List;
 
 public class SampleOfferResponse extends SampleJobOffer {
 
-    protected ResponseEntity<List<OfferDto>> responseWithOneOffer() {
+    protected ResponseEntity<List<JobOfferDto>> responseWithOneOffer() {
         return new ResponseEntity<>(Collections.singletonList(emptyOffer()), HttpStatus.ACCEPTED);
     }
 
-    protected ResponseEntity<List<OfferDto>> responseWithNoOffers() {
+    protected ResponseEntity<List<JobOfferDto>> responseWithNoOffers() {
         return new ResponseEntity<>(Collections.emptyList(), HttpStatus.ACCEPTED);
     }
 
-    protected ResponseEntity<List<OfferDto>> responseWithOffers(OfferDto... offerDto) {
-        return new ResponseEntity<>(Arrays.asList(offerDto), HttpStatus.ACCEPTED);
+    protected ResponseEntity<List<JobOfferDto>> responseWithOffers(JobOfferDto... jobOfferDto) {
+        return new ResponseEntity<>(Arrays.asList(jobOfferDto), HttpStatus.ACCEPTED);
     }
 }

@@ -1,6 +1,6 @@
 package com.junioroffers.infrastracture.service.offer.client;
 
-import com.junioroffers.infrastracture.model.dto.OfferDto;
+import com.junioroffers.infrastracture.model.dto.JobOfferDto;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 
@@ -22,16 +22,16 @@ public class OfferClient implements RemoteOfferClient {
     private final RestTemplate restTemplate;
 
 
-    public List<OfferDto> getOffers() {
+    public List<JobOfferDto> getOffers() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<HttpHeaders> headersHttpEntity = new HttpEntity<>(headers);
         try {
-            ResponseEntity<List<OfferDto>> responseWithHttp = restTemplate.exchange(
+            ResponseEntity<List<JobOfferDto>> responseWithHttp = restTemplate.exchange(
                     url, HttpMethod.GET, headersHttpEntity,
-                    new ParameterizedTypeReference<List<OfferDto>>() {
+                    new ParameterizedTypeReference<List<JobOfferDto>>() {
                     });
-            final List<OfferDto> responseWithHttpInFormAList = responseWithHttp.getBody();
+            final List<JobOfferDto> responseWithHttpInFormAList = responseWithHttp.getBody();
             return (responseWithHttpInFormAList != null) ? responseWithHttpInFormAList : Collections.emptyList();
         } catch (RestClientException e) {
             e.printStackTrace();
