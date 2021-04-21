@@ -1,5 +1,6 @@
 package com.junioroffers.offer;
 
+import com.junioroffers.infrastracture.model.dto.JobOfferDto;
 import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
@@ -32,5 +33,19 @@ public class OfferService {
 
     public List<Offer> saveAll(List<Offer> offersList) {
         return offerRepository.saveAll(offersList);
+    }
+
+    public List<Offer> saveAllOffers(List<JobOfferDto> jobOfferDto) {
+        final List<Offer> offers = conditionsForAddingOffersToTheDatabase(jobOfferDto);
+        offerRepository.saveAll(offers);
+        return offers;
+    }
+
+    public List<Offer> conditionsForAddingOffersToTheDatabase(List<JobOfferDto> jobOfferDto) {
+        return jobOfferDto.stream()
+                .filter(offerDto -> !offerDto.getOfferUrl().isEmpty())
+                .filter(offerDto -> !offerRepository.findOffersByOfferUrlContains(offerDto.getOfferUrl()))
+                .map(OfferMapper::mapToOffer)
+                .collect(Collectors.toList());
     }
 }
