@@ -27,7 +27,7 @@ public class HttpOfferScheduler {
 
     @Scheduled(fixedDelayString = "${fixed.task}")
     public void scheduleTheDownloadOfTheOfferUsingTheHttpClientWithAConstantDelay() {
-        logger.info("Start task executed at:", dateFormat.format(new Date()));
+        logger.info("Start task executed at: " + dateFormat.format(new Date()));
         final List<JobOfferDto> downloadOffers = offer.getOffers();
         logger.info("Download offers: " + downloadOffers);
         logger.info("Checking whether a given offer is already in the database");

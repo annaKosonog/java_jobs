@@ -18,7 +18,7 @@ public class OfferMapper {
                 .build();
     }
 
-    public static Offer mapToOffer(JobOfferDto to){
+    public static Offer mapToOffer(JobOfferDto to) {
         return Offer.builder()
                 .companyName(to.getCompany())
                 .position(to.getTitle())

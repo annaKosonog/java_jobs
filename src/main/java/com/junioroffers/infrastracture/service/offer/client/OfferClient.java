@@ -24,7 +24,7 @@ public class OfferClient implements RemoteOfferClient {
     public List<JobOfferDto> getOffers() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<HttpHeaders> headersHttpEntity = new HttpEntity<>(headers);
+        final HttpEntity<HttpHeaders> headersHttpEntity = new HttpEntity<>(headers);
         try {
             final String uri = "http://localhost:9090/offers";
             ResponseEntity<List<JobOfferDto>> responseWithHttp = restTemplate.exchange(
