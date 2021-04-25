@@ -32,7 +32,7 @@ public class OfferServiceSaveAllWithContainerTests implements SampleOffers {
     }
 
     @Test
-    void should_save_all_offers_in_database(@Autowired OfferRepository offerRepository,
+    void should_save_all_in_database(@Autowired OfferRepository offerRepository,
                                             @Autowired OfferService offerService) {
         //GIVEN
         Offer cross = aCrosswordCyberSecurity();
