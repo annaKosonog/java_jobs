@@ -44,7 +44,7 @@ public class OfferService {
     public List<Offer> conditionsForAddingOffersToTheDatabase(List<JobOfferDto> jobOfferDto) {
         return jobOfferDto.stream()
                 .filter(offerDto -> !offerDto.getOfferUrl().isEmpty())
-                .filter(offerDto -> !offerRepository.findOffersByOfferUrlContains(offerDto.getOfferUrl()))
+                .filter(offerDto -> !offerRepository.existsByOfferUrl(offerDto.getOfferUrl()))
                 .map(OfferMapper::mapToOffer)
                 .collect(Collectors.toList());
     }
