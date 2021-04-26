@@ -2,7 +2,7 @@ package com.junioroffers.offer;
 
 import com.junioroffers.JobOffersApplication;
 import com.junioroffers.infrastracture.model.dto.JobOfferDto;
-import com.junioroffers.infrastracture.service.offer.client.SampleJobOffer;
+import com.junioroffers.infrastracture.service.offer.client.dto.SampleJobOfferDto;
 import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dao.SampleOffers;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 @SpringBootTest(classes = JobOffersApplication.class)
 @ActiveProfiles("container")
 @Testcontainers
-public class OfferServiceSaveAllOffersWithContainerTest extends SampleJobOffer implements SampleOffers {
+public class OfferServiceSaveAllOffersWithContainerTest implements SampleOffers, SampleJobOfferDto {
     @Container
     private static final MongoDBContainer mongoContainer = new MongoDBContainer(DockerImageName.parse("mongo"));
 
@@ -36,15 +36,15 @@ public class OfferServiceSaveAllOffersWithContainerTest extends SampleJobOffer i
                                                    @Autowired OfferService offerService) {
 
         //GIVEN
-        final JobOfferDto specialUrlOne = aOfferDTo("Two turkey",
+        final JobOfferDto specialUrlOne = aJobOfferDto("special url",
+                "Two turkey",
                 "One company",
-                "a lot of",
-                "special url");
+                "a lot of");
 
-        final JobOfferDto specialUrlTwo = aOfferDTo("Game night",
+        final JobOfferDto specialUrlTwo = aJobOfferDto("exists_url",
+                "Game night",
                 "Two company",
-                "much",
-                "exists_url");
+                "much");
 
         final Offer existsWithDatabase = objectParametersWithoutId(
                 "Three company",
@@ -58,7 +58,7 @@ public class OfferServiceSaveAllOffersWithContainerTest extends SampleJobOffer i
         final List<Offer> savedOffersList = offerService.saveAllOffers(Arrays.asList(specialUrlOne, specialUrlTwo));
         //WHEN
         assertThat(savedOffersList.size()).isEqualTo(1);
-        assertThat(offerRepository.existsByOfferUrl("exists_url")).isTrue();
+        assertThat(offerRepository.existsByOfferUrl("special url")).isTrue();
 
     }
 

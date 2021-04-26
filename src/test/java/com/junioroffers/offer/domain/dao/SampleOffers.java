@@ -9,9 +9,9 @@ public interface SampleOffers {
     default Offer objectParametersWithoutId(String companyName, String position, String salary, String offerUrl) {
         final Offer offer = new Offer();
         offer.setCompanyName(companyName);
+        offer.setOfferUrl(offerUrl);
         offer.setPosition(position);
         offer.setSalary(salary);
-        offer.setOfferUrl(offerUrl);
         return offer;
     }
 
