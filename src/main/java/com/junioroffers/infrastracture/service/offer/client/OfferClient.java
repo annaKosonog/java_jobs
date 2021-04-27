@@ -42,6 +42,6 @@ public class OfferClient implements RemoteOfferClient {
     }
 
     private String createAddressUrl(String address){
-        return uri.trim() + ":" + port + address;
+        return uri + ":" + port + address;
     }
 }
