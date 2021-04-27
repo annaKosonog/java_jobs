@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 public class OfferClientUnitTest extends SampleOfferResponse implements SampleRestTemplate {
 
     final RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
-    RemoteOfferClient offerClient = new OfferClient("https://programming-masterpiece.com:1111/test", restTemplate);
+    RemoteOfferClient offerClient = new OfferClient("https://programming-masterpiece.com:", 1111 , restTemplate);
 
     @Test
     public void should_return_empty_list_of_offers() {

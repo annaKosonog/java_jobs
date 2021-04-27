@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class OfferClient implements RemoteOfferClient {
 
-    private final String url;
+    private final String uri;
+    private final int port;
     private final RestTemplate restTemplate;
 
 
@@ -26,9 +28,9 @@ public class OfferClient implements RemoteOfferClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
         final HttpEntity<HttpHeaders> headersHttpEntity = new HttpEntity<>(headers);
         try {
-            final String uri = "http://localhost:9090/offers";
+            final String url = UriComponentsBuilder.fromHttpUrl(createAddressUrl("/offers")).toUriString();
             ResponseEntity<List<JobOfferDto>> responseWithHttp = restTemplate.exchange(
-                    uri, HttpMethod.GET, headersHttpEntity,
+                    url, HttpMethod.GET, headersHttpEntity,
                     new ParameterizedTypeReference<List<JobOfferDto>>() {
                     });
             final List<JobOfferDto> responseWithHttpInFormAList = responseWithHttp.getBody();
@@ -37,5 +39,9 @@ public class OfferClient implements RemoteOfferClient {
             e.printStackTrace();
         }
         return Collections.emptyList();
+    }
+
+    private String createAddressUrl(String address){
+        return uri.trim() + ":" + port + address;
     }
 }

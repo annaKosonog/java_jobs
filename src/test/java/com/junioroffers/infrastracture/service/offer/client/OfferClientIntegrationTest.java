@@ -3,6 +3,7 @@ package com.junioroffers.infrastracture.service.offer.client;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.http.Fault;
+import com.junioroffers.infrastracture.service.offer.config.OfferClientConfigTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
     int port = SocketUtils.findAvailableTcpPort();
     WireMockServer wireMockServer;
 
-    RemoteOfferClient service = new OfferClient("http://localhost:" + port + "/offers", closeRestTemplate());
+    RemoteOfferClient remote = new OfferClientConfigTest().remoteOfferClient(closeRestTemplate(), "http://localhost", port);
 
     @BeforeEach
     void setup() {
@@ -50,7 +51,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(aZeroOffer())));
-        then(service.getOffers()).containsExactlyInAnyOrderElementsOf(Collections.emptyList());
+        then(remote.getOffers()).containsExactlyInAnyOrderElementsOf(Collections.emptyList());
     }
 
     @Test
@@ -60,7 +61,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(aOneOfferJSON())));
-        then(service.getOffers()).containsExactlyElementsOf(Collections.singletonList(aCybersource()));
+        then(remote.getOffers()).containsExactlyElementsOf(Collections.singletonList(aCybersource()));
     }
 
     @Test
@@ -70,7 +71,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(aTwoOffersJSON())));
-        then(service.getOffers()).containsExactlyElementsOf(Arrays.asList(aCybersource(), aJuniorDevOpsEngineer()));
+        then(remote.getOffers()).containsExactlyElementsOf(Arrays.asList(aCybersource(), aJuniorDevOpsEngineer()));
     }
 
     @Test
@@ -80,7 +81,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withFault(Fault.EMPTY_RESPONSE)));
-        then(service.getOffers().size()).isEqualTo(0);
+        then(remote.getOffers().size()).isEqualTo(0);
     }
 
     @Test
@@ -90,7 +91,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withFault(Fault.MALFORMED_RESPONSE_CHUNK)));
-        then(service.getOffers().size()).isEqualTo(0);
+        then(remote.getOffers().size()).isEqualTo(0);
     }
 
     @Test
@@ -100,7 +101,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withFault(Fault.RANDOM_DATA_THEN_CLOSE)));
-        then(service.getOffers().size()).isEqualTo(0);
+        then(remote.getOffers().size()).isEqualTo(0);
     }
 
     @Test
@@ -110,6 +111,6 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withFault(Fault.CONNECTION_RESET_BY_PEER)));
-        then(service.getOffers().size()).isEqualTo(0);
+        then(remote.getOffers().size()).isEqualTo(0);
     }
 }

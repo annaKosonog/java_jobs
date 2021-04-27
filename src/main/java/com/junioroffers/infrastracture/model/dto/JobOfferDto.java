@@ -14,7 +14,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 public class JobOfferDto {
     String title;
