@@ -25,6 +25,8 @@
         <spring-data-mongodb.version>3.1.3</spring-data-mongodb.version>
         <testcontainers.mongodb.version>1.15.2</testcontainers.mongodb.version>
         <testcontainers-junit-jupiter.version>1.15.2</testcontainers-junit-jupiter.version>
+        <awaitility.version>3.0.0</awaitility.version>
+        <awaitility-proxy.version>3.0.0</awaitility-proxy.version>
     </properties>
 
     <dependencies>
@@ -103,6 +105,18 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${testcontainers-junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility-proxy</artifactId>
+            <version>${awaitility-proxy.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

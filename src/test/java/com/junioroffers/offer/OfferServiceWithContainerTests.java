@@ -17,8 +17,10 @@ import org.testcontainers.utility.DockerImageName;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 
 @SpringBootTest(classes = JobOffersApplication.class)
@@ -44,7 +46,7 @@ public class OfferServiceWithContainerTests implements SampleOffers, SampleOffer
         //WHEN
         final List<OfferDto> actualOffers = offerService.findAllOffers();
         //THEN
-        assertEquals(actualOffers, Arrays.asList(cyberSourceDto(), cdqPolandDto()));
+        assertThat(actualOffers).containsAll(Arrays.asList(cyberSourceDto(), cdqPolandDto()));
     }
 
     @Test

@@ -1,10 +1,10 @@
 package com.junioroffers.infrastracture.service.offer.client;
 
-import com.junioroffers.infrastracture.model.dto.OfferDto;
+import com.junioroffers.infrastracture.model.dto.JobOfferDto;
 
 public abstract class SampleJobOffer {
-    protected OfferDto aOfferDTo(String title, String company, String salary, String offerUrl) {
-        return OfferDto.builder()
+    protected JobOfferDto aOfferDTo(String title, String company, String salary, String offerUrl) {
+        return JobOfferDto.builder()
                 .title(title)
                 .company(company)
                 .salary(salary)
@@ -12,8 +12,8 @@ public abstract class SampleJobOffer {
                 .build();
     }
 
-    protected OfferDto emptyOffer() {
-        return new OfferDto();
+    protected JobOfferDto emptyOffer() {
+        return new JobOfferDto();
     }
 
 
@@ -46,12 +46,12 @@ public abstract class SampleJobOffer {
                 "  }]";
     }
 
-    protected OfferDto aCybersource() {
+    protected JobOfferDto aCybersource() {
         return aOfferDTo("Software Engineer - Mobile (m/f/d)", "Cybersource", "4k - 8k PLN",
                 "https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn");
     }
 
-    protected OfferDto aJuniorDevOpsEngineer() {
+    protected JobOfferDto aJuniorDevOpsEngineer() {
         return aOfferDTo("Junior DevOps Engineer", "CDQ Poland", "8k - 14k PLN",
                 "https://nofluffjobs.com/pl/job/junior-devops-engineer-cdq-poland-wroclaw-gnymtxqd");
     }
