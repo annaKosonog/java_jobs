@@ -24,9 +24,9 @@ public class OfferClientConfig {
     }
 
     @Bean
-    public RemoteOfferClient remoteOfferClient (RestTemplate restTemplate,
-                                                @Value("${offer.client.config.uri:http://example.com}") String uri,
-                                                @Value("${offer.client.config.port:5057}") int port) {
+    public RemoteOfferClient remoteOfferClient(RestTemplate restTemplate,
+                                               @Value("${offer.client.config.uri:http://example.com}") String uri,
+                                               @Value("${offer.client.config.port:5057}") int port) {
         return new OfferClient(uri, port, restTemplate);
     }
 }

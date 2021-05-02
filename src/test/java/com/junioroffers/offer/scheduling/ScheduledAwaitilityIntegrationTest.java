@@ -17,7 +17,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest(classes = JobOffersApplication.class)
-@ActiveProfiles("scheduledTest")
+@ActiveProfiles("scheduled_test")
 public class ScheduledAwaitilityIntegrationTest {
 
     @SpyBean

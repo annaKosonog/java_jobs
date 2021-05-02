@@ -20,12 +20,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 
 
 @SpringBootTest(classes = JobOffersApplication.class)
 @Testcontainers
-@ActiveProfiles("container")
+@ActiveProfiles("container_test")
 public class OfferServiceWithContainerTests implements SampleOffers, SampleOffersDto {
 
     @Container

@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.then;
 
 @SpringBootTest(classes = JobOffersApplication.class)
-@ActiveProfiles("container")
+@ActiveProfiles("container_test")
 @Testcontainers
 public class OfferServiceSaveAllOffersWithContainerTest implements SampleOffers, SampleJobOfferDto {
     @Container
