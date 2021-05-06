@@ -17,13 +17,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @ConditionalOnProperty(value = "redis.cache.enabled", matchIfMissing = true)
 @Slf4j
 public class RedisConfig {
-    @Value("${spring.redis.host}")
-    private String host;
-    @Value("${spring.redis.port}")
-    private int port;
 
     @Bean
-    public JedisConnectionFactory jedisConnectionFactory() {
+    public JedisConnectionFactory jedisConnectionFactory(@Value("${spring.redis.host:localhost}") String host,
+                                                         @Value("${spring.redis.port:6379}") int port) {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setHostName(host);
         redisStandaloneConfiguration.setPort(port);
@@ -31,14 +28,16 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory,
+                                                       @Value("${spring.redis.host:localhost}") String host,
+                                                       @Value("${spring.redis.port:6379}") int port) {
 
         if (null == jedisConnectionFactory) {
             log.error("Redis Template Service is not available");
             return null;
         }
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(jedisConnectionFactory());
+        template.setConnectionFactory(jedisConnectionFactory(host, port));
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());

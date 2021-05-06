@@ -14,7 +14,8 @@ import java.time.Duration;
 public class OfferClientConfig {
 
     @Bean
-    public RestTemplate restTemplate(@Value("${offer.client.config.uri}") String uri, @Value("${offer.client.config.connectTimeout}") long connectTimeout,
+    public RestTemplate restTemplate(@Value("${offer.client.config.uri}") String uri,
+                                     @Value("${offer.client.config.connectTimeout}") long connectTimeout,
                                      @Value("${offer.client.config.readTimeout}") long readTimeout) {
         return new RestTemplateBuilder()
                 .rootUri(uri)

@@ -22,7 +22,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
     int port = SocketUtils.findAvailableTcpPort();
     WireMockServer wireMockServer;
 
-    RemoteOfferClient remote = new OfferClientConfigTest().remoteOfferClient(closeRestTemplate(), "http://localhost", port);
+    RemoteOfferClient remote = new OfferClientConfigTest().remoteOfferClientTest("http://localhost:", port, closeRestTemplate());
 
     @BeforeEach
     void setup() {

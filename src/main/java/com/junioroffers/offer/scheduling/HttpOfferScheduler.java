@@ -19,13 +19,11 @@ import java.util.List;
 public class HttpOfferScheduler {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
-
     private final RemoteOfferClient offer;
     private final OfferService offerService;
 
 
-    @Scheduled(fixedDelayString = "${http.offer.downloads}")
+    @Scheduled(fixedDelayString = "${scheduling.job.fixed.delay.hours:PT3H}")
     public void scheduleTheDownloadOfTheOfferUsingTheHttpClientWithAConstantDelay() {
         log.info("Start task executed at: " + dateFormat.format(new Date()));
         final List<JobOfferDto> downloadOffers = offer.getOffers();
