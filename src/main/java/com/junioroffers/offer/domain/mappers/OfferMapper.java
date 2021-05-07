@@ -29,12 +29,10 @@ public class OfferMapper {
 
     public static Offer reverseToJobOfferDto(OfferDto from) {
         return Offer.builder()
-                .id(from.getId())
                 .companyName(from.getCompanyName())
                 .position(from.getPosition())
                 .salary(from.getSalary())
                 .offerUrl(from.getOfferUrl())
                 .build();
-
     }
 }

@@ -50,4 +50,8 @@ public class OfferService {
                 .map(OfferMapper::mapToOffer)
                 .collect(Collectors.toList());
     }
+
+    public Offer addOffers(OfferDto offerDto) {
+        return offerRepository.save(OfferMapper.reverseToJobOfferDto(offerDto));
+    }
 }
