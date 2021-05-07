@@ -29,8 +29,8 @@
         <awaitility-proxy.version>3.0.0</awaitility-proxy.version>
         <spring-data-redis.version>2.4.5</spring-data-redis.version>
         <jedis.version>3.3.0</jedis.version>
-        <springfox-swagger2.version>2.6.1</springfox-swagger2.version>
-        <springfox-swagger-ui.version>2.6.1</springfox-swagger-ui.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
     </properties>
 
     <dependencies>
