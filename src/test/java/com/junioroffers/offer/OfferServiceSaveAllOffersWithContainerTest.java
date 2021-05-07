@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.then;
 
 @SpringBootTest(classes = JobOffersApplication.class)
-@ActiveProfiles("container")
+@ActiveProfiles("container_test")
 @Testcontainers
 public class OfferServiceSaveAllOffersWithContainerTest implements SampleOffers, SampleJobOfferDto {
     @Container
@@ -52,7 +52,7 @@ public class OfferServiceSaveAllOffersWithContainerTest implements SampleOffers,
                 "343232",
                 "exists_url");
         offerRepository.save(existsWithDatabase);
-        then(offerRepository.existsByOfferUrl(existsWithDatabase.getOfferUrl())).isTrue();
+        then(offerRepository.existsByOfferUrl(specialUrlTwo.getOfferUrl())).isTrue();
 
         //WHEN
         final List<Offer> savedOffersList = offerService.saveAllOffers(Arrays.asList(specialUrlOne, specialUrlTwo));

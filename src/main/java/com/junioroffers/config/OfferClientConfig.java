@@ -14,7 +14,8 @@ import java.time.Duration;
 public class OfferClientConfig {
 
     @Bean
-    public RestTemplate restTemplate(@Value("${offer.client.config.uri}") String uri, @Value("${offer.client.config.connectTimeout}") long connectTimeout,
+    public RestTemplate restTemplate(@Value("${offer.client.config.uri}") String uri,
+                                     @Value("${offer.client.config.connectTimeout}") long connectTimeout,
                                      @Value("${offer.client.config.readTimeout}") long readTimeout) {
         return new RestTemplateBuilder()
                 .rootUri(uri)
@@ -24,9 +25,9 @@ public class OfferClientConfig {
     }
 
     @Bean
-    public RemoteOfferClient remoteOfferClient (RestTemplate restTemplate,
-                                                @Value("${offer.client.config.uri:http://example.com}") String uri,
-                                                @Value("${offer.client.config.port:5057}") int port) {
+    public RemoteOfferClient remoteOfferClient(RestTemplate restTemplate,
+                                               @Value("${offer.client.config.uri:http://example.com}") String uri,
+                                               @Value("${offer.client.config.port:5057}") int port) {
         return new OfferClient(uri, port, restTemplate);
     }
 }

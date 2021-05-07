@@ -6,6 +6,7 @@ import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
 import com.junioroffers.offer.domain.mappers.OfferMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class OfferService {
 
     private final OfferRepository offerRepository;
 
+    @Cacheable(cacheNames = "jobs", key = "#root.method.name")
     public List<OfferDto> findAllOffers() {
 
         return offerRepository.findAll()

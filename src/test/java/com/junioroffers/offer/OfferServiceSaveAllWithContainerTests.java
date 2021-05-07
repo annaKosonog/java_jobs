@@ -19,7 +19,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = JobOffersApplication.class)
-@ActiveProfiles("container")
+@ActiveProfiles("container_test")
 @Testcontainers
 public class OfferServiceSaveAllWithContainerTests implements SampleOffers {
 
