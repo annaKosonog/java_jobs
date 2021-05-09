@@ -3,6 +3,7 @@ package com.junioroffers.offer;
 import com.junioroffers.infrastracture.model.dto.JobOfferDto;
 import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dto.OfferDto;
+import com.junioroffers.offer.domain.exceptions.DuplicateKeyException;
 import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
 import com.junioroffers.offer.domain.mappers.OfferMapper;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +52,13 @@ public class OfferService {
                 .collect(Collectors.toList());
     }
 
-    public Offer addOffers(OfferDto offerDto) {
-        return offerRepository.save(OfferMapper.reverseToJobOfferDto(offerDto));
+    public OfferDto addOffers(OfferDto offerDto) {
+        final Offer offer = OfferMapper.mapFromOffer(offerDto);
+        try {
+            final Offer saveDb = offerRepository.save(offer);
+            return OfferMapper.mapToOfferDto(saveDb);
+        } catch (DuplicateKeyException e) {
+            throw new DuplicateKeyException("The given url already exists in the database:", offer.getOfferUrl(), e.getMostSpecificCause());
+        }
     }
 }

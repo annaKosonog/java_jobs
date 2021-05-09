@@ -1,6 +1,5 @@
 package com.junioroffers.offer;
 
-import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -35,8 +35,9 @@ public class OfferController {
     public ResponseEntity<OfferDto> getOfferById(@PathVariable String id) {
         return ResponseEntity.ok(offerService.findOfferById(id));
     }
-    @PostMapping(value = "/offers")
-    public ResponseEntity<Offer> insertOffers(@RequestBody OfferDto offerDto){
+
+    @PostMapping()
+    public ResponseEntity<OfferDto> insertOffers(@Valid @RequestBody OfferDto offerDto) {
         return ResponseEntity.ok(offerService.addOffers(offerDto));
     }
 

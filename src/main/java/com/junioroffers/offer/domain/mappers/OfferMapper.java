@@ -27,7 +27,7 @@ public class OfferMapper {
                 .build();
     }
 
-    public static Offer reverseToJobOfferDto(OfferDto from) {
+    public static Offer mapFromOffer(OfferDto from) {
         return Offer.builder()
                 .companyName(from.getCompanyName())
                 .position(from.getPosition())
