@@ -20,4 +20,13 @@ public class OfferControllerErrorHandler {
         return new OfferErrorResponse(HttpStatus.NOT_FOUND, message);
     }
 
+    @ExceptionHandler(DuplicateKeyException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public OfferErrorResponse offersConflict(DuplicateKeyException exception) {
+        String message = "The given url already exists in the database" + exception.getMessage();
+        log.info(exception.getMessage(), exception);
+        return new OfferErrorResponse(HttpStatus.BAD_REQUEST, message);
+    }
+
 }
