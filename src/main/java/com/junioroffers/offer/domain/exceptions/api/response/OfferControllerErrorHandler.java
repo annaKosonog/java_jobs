@@ -23,11 +23,11 @@ public class OfferControllerErrorHandler {
         return new OfferErrorResponse(HttpStatus.NOT_FOUND, message);
     }
 
-    @ExceptionHandler({InvalidDataAccessApiUsageException.class, DataAccessException.class, DuplicateKeyException.class})
+    @ExceptionHandler({InvalidDataAccessApiUsageException.class, DataAccessException.class, OfferExistUrlException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
     @ResponseBody
-    public OfferErrorResponse offersConflict(DuplicateKeyException exception) {
-        String message = "The given url already exists in the database" + exception.getMessage();
+    public OfferErrorResponse offersConflict(OfferExistUrlException exception) {
+        String message = "The given url already exists in the database: " + exception.getInfo();
         log.info("Conflict: {}", exception.getMessage());
         log.debug("Conflict: ", exception);
         return new OfferErrorResponse(HttpStatus.CONFLICT, message);
