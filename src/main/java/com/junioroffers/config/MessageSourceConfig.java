@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import java.nio.charset.Charset;
+
 @Configuration
 public class MessageSourceConfig {
 
@@ -15,7 +17,7 @@ public class MessageSourceConfig {
                 = new ReloadableResourceBundleMessageSource();
 
         messageSource.setBasename("classpath:messages");
-        messageSource.setDefaultEncoding("UFT-8");
+        messageSource.setDefaultEncoding(Charset.forName("UTF-8").toString());
         return messageSource;
     }
 

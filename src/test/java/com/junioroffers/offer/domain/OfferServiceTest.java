@@ -5,7 +5,7 @@ import com.junioroffers.offer.OfferService;
 import com.junioroffers.offer.domain.dao.SampleOffers;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.dto.SampleOffersDto;
-import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
+import com.junioroffers.offer.domain.exceptions.api.response.OfferNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

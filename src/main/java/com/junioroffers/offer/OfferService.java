@@ -3,8 +3,8 @@ package com.junioroffers.offer;
 import com.junioroffers.infrastracture.model.dto.JobOfferDto;
 import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dto.OfferDto;
-import com.junioroffers.offer.domain.exceptions.DuplicateKeyException;
-import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
+import com.junioroffers.offer.domain.exceptions.api.response.DuplicateKeyException;
+import com.junioroffers.offer.domain.exceptions.api.response.OfferNotFoundException;
 import com.junioroffers.offer.domain.mappers.OfferMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -58,7 +58,7 @@ public class OfferService {
             final Offer saveDb = offerRepository.save(offer);
             return OfferMapper.mapToOfferDto(saveDb);
         } catch (DuplicateKeyException e) {
-            throw new DuplicateKeyException("The given url already exists in the database:", offer.getOfferUrl(), e.getMostSpecificCause());
+            throw new DuplicateKeyException(offerDto.getOfferUrl());
         }
     }
 }
