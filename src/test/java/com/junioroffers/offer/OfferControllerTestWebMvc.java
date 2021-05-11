@@ -5,7 +5,7 @@ import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.dto.SampleOffersDto;
 import com.junioroffers.offer.domain.exceptions.api.response.OfferControllerErrorHandler;
 import com.junioroffers.offer.domain.exceptions.api.response.OfferErrorResponse;
-import com.junioroffers.offer.domain.exceptions.SampleOfferNotFoundException;
+import com.junioroffers.offer.domain.exceptions.api.response.SampleOfferNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

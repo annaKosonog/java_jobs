@@ -1,8 +1,5 @@
-package com.junioroffers.offer.domain.exceptions;
+package com.junioroffers.offer.domain.exceptions.api.response;
 
-import com.junioroffers.offer.domain.exceptions.api.response.OfferControllerErrorHandler;
-import com.junioroffers.offer.domain.exceptions.api.response.OfferErrorResponse;
-import com.junioroffers.offer.domain.exceptions.api.response.OfferNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

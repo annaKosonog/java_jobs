@@ -1,6 +1,4 @@
-package com.junioroffers.offer.domain.exceptions;
-
-import com.junioroffers.offer.domain.exceptions.api.response.OfferNotFoundException;
+package com.junioroffers.offer.domain.exceptions.api.response;
 
 public interface SampleOfferNotFoundException {
 

@@ -1,6 +1,5 @@
-package com.junioroffers.offer.domain.exceptions;
+package com.junioroffers.offer.domain.exceptions.api.response;
 
-import com.junioroffers.offer.domain.exceptions.api.response.OfferErrorResponse;
 import org.springframework.http.HttpStatus;
 
 public interface SampleOfferErrorResponse {
