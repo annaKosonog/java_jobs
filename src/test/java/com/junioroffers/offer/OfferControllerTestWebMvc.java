@@ -1,15 +1,18 @@
 package com.junioroffers.offer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.junioroffers.config.MessageSourceConfig;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.dto.SampleOffersDto;
 import com.junioroffers.offer.domain.exceptions.api.response.OfferControllerErrorHandler;
 import com.junioroffers.offer.domain.exceptions.api.response.OfferErrorResponse;
 import com.junioroffers.offer.domain.exceptions.api.response.SampleOfferNotFoundException;
+import com.junioroffers.offer.domain.exceptions.api.valid.ApiOfferControllerErrorHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -69,11 +72,12 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
         final MvcResult result = mockMvc.perform(get("/offers/100"))
                 .andExpect(status().isNotFound())
                 .andReturn();
+
         String actualResponseBody = result.getResponse().getContentAsString();
         assertThat(actualResponseBody).isEqualTo(expectedResponse);
     }
 }
-
+@Import(value = MessageSourceConfig.class)
 class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
 
     @Bean
@@ -88,6 +92,10 @@ class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
                 }
                 throw sampleOfferNotFoundException(id);
             }
+
+            public OfferDto addOffers(OfferDto offerDto) {
+                return cyberSourceDto();
+            }
         };
     }
 
@@ -99,5 +107,10 @@ class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
     @Bean
     OfferControllerErrorHandler offerControllerErrorHandler() {
         return new OfferControllerErrorHandler();
+    }
+
+    @Bean
+    ApiOfferControllerErrorHandler apiOfferControllerErrorHandler() {
+        return new ApiOfferControllerErrorHandler();
     }
 }
