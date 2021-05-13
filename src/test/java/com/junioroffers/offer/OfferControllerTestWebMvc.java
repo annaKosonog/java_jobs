@@ -34,7 +34,7 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
 
     @Test
     void should_return_correct_message_during_found_all_offers(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
-        final List<OfferDto> responseHttp = Arrays.asList(cyberSourceDto(), cdqPolandDto());
+        final List<OfferDto> responseHttp = Arrays.asList(cyberSourceDtoMapper(), cdqPolandDtoMapper());
         String expectedResponse = objectMapper.writeValueAsString(responseHttp);
 
 
@@ -51,7 +51,7 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
     @Test
     void should_return_correct_message_during_found_offer_with_id(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
         final String id = "7b3e02b3-6b1a-4e75-bdad-cef5b279b074";
-        String expectedResponse = objectMapper.writeValueAsString(cyberSourceDto());
+        String expectedResponse = objectMapper.writeValueAsString(cyberSourceDtoMapper());
 
         MvcResult result = mockMvc.perform(get("/offers/{id}", id)
                 .accept(MediaType.APPLICATION_JSON))
@@ -86,15 +86,15 @@ class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
         return new OfferService(offerRepository) {
             public OfferDto findOfferById(String id) {
                 if (id.equals("7b3e02b3-6b1a-4e75-bdad-cef5b279b074")) {
-                    return cyberSourceDto();
+                    return cyberSourceDtoMapper();
                 } else if (id.equals("24ee32b6-6b15-11eb-9439-0242ac130002")) {
-                    return cdqPolandDto();
+                    return cdqPolandDtoMapper();
                 }
                 throw sampleOfferNotFoundException(id);
             }
 
             public OfferDto addOffers(OfferDto offerDto) {
-                return cyberSourceDto();
+                return cyberSourceDtoMapper();
             }
         };
     }

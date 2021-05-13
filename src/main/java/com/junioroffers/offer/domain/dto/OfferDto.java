@@ -22,4 +22,15 @@ public class OfferDto implements Serializable {
     private final String salary;
     @NotBlank(message = "{offerUrl.not.blank}")
     private final String offerUrl;
+
+
+    @Override
+    public String toString() {
+        return "OfferDto: " +
+                "id: " + id +
+                " companyName: " + companyName +
+                " position: " + position +
+                " salary: " + salary  +
+                " offerUrl: " + offerUrl;
+    }
 }
