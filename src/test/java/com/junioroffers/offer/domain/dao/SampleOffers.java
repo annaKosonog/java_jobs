@@ -79,6 +79,14 @@ public interface SampleOffers {
                 "Unique url"
         );
     }
+    default OfferDto aFirstCompany() {
+        return allParametersWhereHaveNotId(
+                "Juthisho",
+                "Game position",
+                "much",
+                "Unique url"
+        );
+    }
 
     default OfferDto cyberSourceDto() {
 
@@ -131,13 +139,5 @@ public interface SampleOffers {
                 "Software Engineer - Mobile (m/f/d)",
                 "4k - 8k PLN",
                 "https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn");
-    }
-
-    default OfferDto Juthisho() {
-        return allParametersOfTheOfferDto("609d32365c62d131949856f6",
-                "Juthisho",
-                "Game position",
-                "much",
-                "unique_url");
     }
 }

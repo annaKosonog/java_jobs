@@ -43,10 +43,7 @@ public class OfferServiceAddOffersWithContainerTest implements SampleOffers {
                 "exist_url");
         offerRepository.save(offerInTheDb);
 
-        final OfferDto checkOfferDto = allParametersWhereHaveNotId("Juthisho",
-                "Game position",
-                "much",
-                "unique_url");
+        final OfferDto checkOfferDto = aFirstCompany();
         then(offerRepository.existsByOfferUrl(checkOfferDto.getOfferUrl())).isFalse();
 
         //WHEN
