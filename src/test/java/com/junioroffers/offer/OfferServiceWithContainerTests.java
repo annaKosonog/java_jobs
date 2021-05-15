@@ -45,7 +45,7 @@ public class OfferServiceWithContainerTests implements SampleOffers, SampleOffer
         //WHEN
         final List<OfferDto> actualOffers = offerService.findAllOffers();
         //THEN
-        assertThat(actualOffers).containsAll(Arrays.asList(cyberSourceDto(), cdqPolandDto()));
+        assertThat(actualOffers).containsAll(Arrays.asList(cyberSourceDtoMapper(), cdqPolandDtoMapper()));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class OfferServiceWithContainerTests implements SampleOffers, SampleOffer
         //WHEN
         final OfferDto actual = offerService.findOfferById(ID);
         //THEN
-        assertEquals(actual, cyberSourceDto());
+        assertEquals(actual, cyberSourceDtoMapper());
     }
 
 

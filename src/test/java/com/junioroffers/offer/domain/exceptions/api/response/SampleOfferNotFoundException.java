@@ -1,4 +1,4 @@
-package com.junioroffers.offer.domain.exceptions;
+package com.junioroffers.offer.domain.exceptions.api.response;
 
 public interface SampleOfferNotFoundException {
 

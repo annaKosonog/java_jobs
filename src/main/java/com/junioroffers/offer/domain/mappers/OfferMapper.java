@@ -26,4 +26,13 @@ public class OfferMapper {
                 .offerUrl(to.getOfferUrl())
                 .build();
     }
+
+    public static Offer mapFromOffer(OfferDto from) {
+        return Offer.builder()
+                .companyName(from.getCompanyName())
+                .position(from.getPosition())
+                .salary(from.getSalary())
+                .offerUrl(from.getOfferUrl())
+                .build();
+    }
 }

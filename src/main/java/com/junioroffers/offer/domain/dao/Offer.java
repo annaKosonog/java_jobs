@@ -7,13 +7,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
@@ -28,5 +27,6 @@ public class Offer {
     private String companyName;
     private String position;
     private String salary;
+    @Indexed(unique = true)
     private String offerUrl;
 }

@@ -3,10 +3,12 @@ package com.junioroffers.offer;
 import com.junioroffers.infrastracture.model.dto.JobOfferDto;
 import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dto.OfferDto;
-import com.junioroffers.offer.domain.exceptions.OfferNotFoundException;
+import com.junioroffers.offer.domain.exceptions.api.response.OfferExistUrlException;
+import com.junioroffers.offer.domain.exceptions.api.response.OfferNotFoundException;
 import com.junioroffers.offer.domain.mappers.OfferMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,5 +51,15 @@ public class OfferService {
                 .filter(offerDto -> !offerRepository.existsByOfferUrl(offerDto.getOfferUrl()))
                 .map(OfferMapper::mapToOffer)
                 .collect(Collectors.toList());
+    }
+
+    public OfferDto addOffers(OfferDto offerDto) {
+        final Offer offer = OfferMapper.mapFromOffer(offerDto);
+        try {
+            final Offer saveDb = offerRepository.save(offer);
+            return OfferMapper.mapToOfferDto(saveDb);
+        } catch (DuplicateKeyException e) {
+            throw new OfferExistUrlException(offerDto.getOfferUrl());
+        }
     }
 }
