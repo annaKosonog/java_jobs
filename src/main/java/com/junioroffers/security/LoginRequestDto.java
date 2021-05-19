@@ -11,8 +11,8 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode
 public class LoginRequestDto {
 
-    @NotBlank
+    @NotBlank(message = "${username.not.blank}")
     private final String username;
-    @NotBlank
+    @NotBlank(message = "${password.not.blank}")
     private final String password;
 }

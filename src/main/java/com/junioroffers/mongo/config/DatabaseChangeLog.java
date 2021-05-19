@@ -4,6 +4,9 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.junioroffers.offer.OfferRepository;
 import com.junioroffers.offer.domain.dao.Offer;
+import com.junioroffers.security.User;
+import com.junioroffers.security.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 
@@ -33,5 +36,13 @@ public class DatabaseChangeLog {
         cdqSource.setSalary("8k - 14k PLN");
         cdqSource.setCompanyName("CDQ Poland");
         return cdqSource;
+    }
+
+    @ChangeSet(order = "002", id = "addUserToDb", author = "Sai")
+    public void addUserToDb(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        final User user = new User();
+        user.setUsername("admin");
+        user.setPassword(passwordEncoder.encode("admin"));
+        userRepository.insert(user);
     }
 }
