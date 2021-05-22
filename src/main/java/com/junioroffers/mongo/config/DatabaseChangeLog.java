@@ -4,7 +4,7 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.junioroffers.offer.OfferRepository;
 import com.junioroffers.offer.domain.dao.Offer;
-import com.junioroffers.security.User;
+import com.junioroffers.security.model.User;
 import com.junioroffers.security.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -42,7 +42,7 @@ public class DatabaseChangeLog {
     public void addUserToDb(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         final User user = new User();
         user.setUsername("admin");
-        user.setPassword(passwordEncoder.encode("admin"));
-        userRepository.insert(user);
+       passwordEncoder.encode(user.getPassword());
+        userRepository.save(user);
     }
 }

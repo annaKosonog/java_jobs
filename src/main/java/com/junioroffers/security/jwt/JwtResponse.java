@@ -1,4 +1,4 @@
-package com.junioroffers.security;
+package com.junioroffers.security.jwt;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

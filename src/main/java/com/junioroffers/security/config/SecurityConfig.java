@@ -30,18 +30,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_WHITELIST = {
             // -- Swagger UI v2
             "/v2/api-docs",
-            "/swagger-resources",
             "/swagger-resources/**",
-            "/configuration/ui",
-            "/configuration/**",
-            "/configuration/security",
-            "/swagger-ui.html",
+            "/swagger-ui.html**",
             "/webjars/**",
+            "/login**",
+            "/signup**"
     };
 
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -54,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean
@@ -71,9 +69,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .authorizeRequests().anyRequest().authenticated();
-
+                .headers().frameOptions().disable()
+                .and()
+                .httpBasic().disable();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }

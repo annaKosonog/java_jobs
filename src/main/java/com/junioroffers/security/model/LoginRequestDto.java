@@ -1,4 +1,4 @@
-package com.junioroffers.security;
+package com.junioroffers.security.model;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -11,8 +11,8 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode
 public class LoginRequestDto {
 
-    @NotBlank(message = "${username.not.blank}")
+    @NotBlank(message = "{username.not.blank}")
     private final String username;
-    @NotBlank(message = "${password.not.blank}")
+    @NotBlank(message = "{password.not.blank}")
     private final String password;
 }

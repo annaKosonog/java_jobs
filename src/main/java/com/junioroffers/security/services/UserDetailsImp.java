@@ -1,40 +1,44 @@
 package com.junioroffers.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.junioroffers.security.User;
+import com.junioroffers.security.model.User;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
-
+@RequiredArgsConstructor
+@EqualsAndHashCode
 public class UserDetailsImp implements UserDetails {
 
-    private String username;
+    private static final long serialVersionUID = 1L;
+
+    private final String id;
+
+    private final String username;
 
     @JsonIgnore
-    private String password;
+    private final String password;
 
+    private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImp(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public UserDetailsImp() {
-    }
 
     public static UserDetailsImp build(User user) {
 
         return new UserDetailsImp(
+                user.getId(),
                 user.getUsername(),
-                user.getPassword());
+                user.getPassword(),
+                Collections.EMPTY_LIST);
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
