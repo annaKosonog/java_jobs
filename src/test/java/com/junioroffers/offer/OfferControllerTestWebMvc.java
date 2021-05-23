@@ -8,6 +8,8 @@ import com.junioroffers.offer.domain.exceptions.api.response.OfferControllerErro
 import com.junioroffers.offer.domain.exceptions.api.response.OfferErrorResponse;
 import com.junioroffers.offer.domain.exceptions.api.response.SampleOfferNotFoundException;
 import com.junioroffers.offer.domain.exceptions.api.valid.ApiOfferControllerErrorHandler;
+import com.junioroffers.security.config.SecurityConfig;
+import com.junioroffers.security.jwt.JwtTestConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -77,7 +79,7 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
         assertThat(actualResponseBody).isEqualTo(expectedResponse);
     }
 }
-@Import(value = MessageSourceConfig.class)
+@Import({MessageSourceConfig.class, SecurityConfig.class, JwtTestConfig.class} )
 class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
 
     @Bean

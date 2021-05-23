@@ -1,26 +1,14 @@
 package com.junioroffers.security.domain;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.junioroffers.security.services.UserDetailsImp;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collections;
+import java.util.List;
 
 public interface SampleUser {
 
-    default User allParametersOfTheObjectUser(String id, String username, String password) {
-        return new User(id, username, password);
+    default UserDetailsImp getUser(String username, String password, List<GrantedAuthority> authorities) {
+        return new UserDetailsImp(null, username, password, Collections.EMPTY_LIST);
     }
-
-    default User parametersUserWithoutId(String username, String password) {
-        final User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        return user;
-    }
-
-
-    default User aUser(User user, PasswordEncoder passwordEncoder){
-        user.setUsername("user");
-        passwordEncoder.encode(user.getPassword());
-        return user;
-    }
-
-
 }
