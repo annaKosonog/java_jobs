@@ -1,4 +1,4 @@
-package com.junioroffers.security.model;
+package com.junioroffers.security.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

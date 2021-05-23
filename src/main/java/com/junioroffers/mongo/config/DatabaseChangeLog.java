@@ -4,7 +4,7 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.junioroffers.offer.OfferRepository;
 import com.junioroffers.offer.domain.dao.Offer;
-import com.junioroffers.security.model.User;
+import com.junioroffers.security.domain.User;
 import com.junioroffers.security.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

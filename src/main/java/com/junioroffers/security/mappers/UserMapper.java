@@ -1,7 +1,7 @@
 package com.junioroffers.security.mappers;
 
-import com.junioroffers.security.model.LoginRequestDto;
-import com.junioroffers.security.model.User;
+import com.junioroffers.security.domain.LoginRequestDto;
+import com.junioroffers.security.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

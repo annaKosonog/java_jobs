@@ -1,6 +1,6 @@
 package com.junioroffers.security;
 
-import com.junioroffers.security.model.User;
+import com.junioroffers.security.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

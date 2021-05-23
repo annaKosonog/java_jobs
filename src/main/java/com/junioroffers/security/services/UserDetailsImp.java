@@ -1,7 +1,7 @@
 package com.junioroffers.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.junioroffers.security.model.User;
+import com.junioroffers.security.domain.User;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

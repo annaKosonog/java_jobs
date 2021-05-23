@@ -1,6 +1,6 @@
 package com.junioroffers.security.services;
 
-import com.junioroffers.security.model.User;
+import com.junioroffers.security.domain.User;
 import com.junioroffers.security.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

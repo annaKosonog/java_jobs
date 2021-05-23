@@ -2,8 +2,8 @@ package com.junioroffers.security;
 
 import com.junioroffers.security.jwt.JwtResponse;
 import com.junioroffers.security.jwt.JwtUtils;
-import com.junioroffers.security.model.LoginRequestDto;
-import com.junioroffers.security.model.User;
+import com.junioroffers.security.domain.LoginRequestDto;
+import com.junioroffers.security.domain.User;
 import com.junioroffers.security.services.UserDetailsImp;
 import com.junioroffers.security.services.UserService;
 import lombok.RequiredArgsConstructor;
