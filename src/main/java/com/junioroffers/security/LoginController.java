@@ -42,7 +42,7 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
+    public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
         final User user = userService.addUsers(loginRequestDto);
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

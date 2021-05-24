@@ -6,6 +6,7 @@ import com.junioroffers.security.domain.SampleJwtResponse;
 import com.junioroffers.security.domain.SampleLoginRequestDto;
 import com.junioroffers.security.domain.SampleMessageResponse;
 import com.junioroffers.security.domain.SampleUser;
+import com.junioroffers.security.domain.User;
 import com.junioroffers.security.jwt.JwtResponse;
 import com.junioroffers.security.jwt.JwtUtils;
 import com.junioroffers.security.mappers.UserMapper;
@@ -58,5 +59,22 @@ public class LoginControllerTest implements SampleLoginRequestDto, SampleUser, S
         //THEN
         assertThat(actualResponse.toString()).isEqualTo(expectedResponse.toString());
 
+    }
+
+    @Test
+    public void should_return_add_user_to_db() {
+        final ResponseEntity<MessageResponse> expectedResponse = messageResponse("User registered successfully!");
+        final UserRepository userRepository = mock(UserRepository.class);
+        final UserMapper userMapper = mock(UserMapper.class);
+        final UserService userService = new UserService(userRepository, userMapper);
+
+        final LoginRequestDto loginRequestDto = loginRequest("user", "user");
+        final User saveToDb = userService.addUsers(loginRequestDto);
+        final LoginController loginController = new LoginController(null, null, userRepository, userService);
+        //WHEN
+        final ResponseEntity<MessageResponse> actualResponse = loginController.registerUser(loginRequestDto);
+
+        //THEN
+        assertThat(actualResponse.toString()).isEqualTo(expectedResponse.toString());
     }
 }
