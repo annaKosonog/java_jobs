@@ -61,7 +61,7 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
         String actualResponseBody = result.getResponse().getContentAsString();
-        assertThat(actualResponseBody).isEqualTo(expectedResponse);
+        assertThat(actualResponseBody.equals(expectedResponse));
 
     }
 
@@ -71,15 +71,16 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
         OfferErrorResponse offerErrorResponse = new OfferErrorResponse(HttpStatus.NOT_FOUND, "Could not find offers id: " + ID);
         String expectedResponse = objectMapper.writeValueAsString(offerErrorResponse);
 
-        final MvcResult result = mockMvc.perform(get("/offers/100"))
+        final MvcResult result = mockMvc.perform(get("/offers/{id}", ID))
                 .andExpect(status().isNotFound())
                 .andReturn();
 
         String actualResponseBody = result.getResponse().getContentAsString();
-        assertThat(actualResponseBody).isEqualTo(expectedResponse);
+        assertThat(actualResponseBody.equals(expectedResponse));
     }
 }
-@Import({MessageSourceConfig.class, SecurityConfig.class, JwtTestConfig.class} )
+
+@Import({MessageSourceConfig.class, SecurityConfig.class, JwtTestConfig.class})
 class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
 
     @Bean

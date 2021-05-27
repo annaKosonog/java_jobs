@@ -13,7 +13,7 @@ import java.util.Arrays;
 @ChangeLog(order = "1")
 public class DatabaseChangeLog {
 
-    @ChangeSet(order = "001", id = "dataBase", author = "Sai")
+    @ChangeSet(order = "001", id = "dataBase", author = "Sai", failFast = false)
     public void dataBase(OfferRepository offerRepository) {
         offerRepository.insert(Arrays.asList(cyberSource(), cdqPoland()));
     }
@@ -38,11 +38,11 @@ public class DatabaseChangeLog {
         return cdqSource;
     }
 
-    @ChangeSet(order = "002", id = "addUserToDb", author = "Sai")
+    @ChangeSet(order = "002", id = "addUserToDb", author = "Sai", failFast = false)
     public void addUserToDb(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         final User user = new User();
         user.setUsername("admin");
-       passwordEncoder.encode(user.getPassword());
+       user.setPassword(passwordEncoder.encode("admin"));
         userRepository.save(user);
     }
 }

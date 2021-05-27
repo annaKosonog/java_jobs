@@ -9,19 +9,19 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Slf4j
-@Configuration
+@Component
 public class JwtUtils {
 
-    @Value("${app.jwt.expiration.time}")
+    @Value("${app.jwt.expiration.time:86400000}")
     private int jwtExpirationTime;
 
-    @Value("${app.jwt.secret}")
+    @Value("${app.jwt.secret:bezKoderSecretKey}")
     private String jwtSecret;
 
     public boolean validateJwtToken(String jwt) {

@@ -50,7 +50,7 @@ public class LoginControllerTest implements SampleLoginRequestDto, SampleUser, S
         final UserMapper userMapper = mock(UserMapper.class);
         final UserService userService = new UserService(userRepository, userMapper);
 
-        final LoginRequestDto loginRequestDto = loginRequest("user", "user");
+        final LoginRequestDto loginRequestDto = loginDtoParametersWithoutId("user", "user");
         final LoginController loginController = new LoginController(jwtUtils, authenticationManager, userRepository, userService);
 
         //WHEN
@@ -68,7 +68,7 @@ public class LoginControllerTest implements SampleLoginRequestDto, SampleUser, S
         final UserMapper userMapper = mock(UserMapper.class);
         final UserService userService = new UserService(userRepository, userMapper);
 
-        final LoginRequestDto loginRequestDto = loginRequest("user", "user");
+        final LoginRequestDto loginRequestDto = loginDtoParametersWithoutId("user", "user");
         final User saveToDb = userService.addUsers(loginRequestDto);
         final LoginController loginController = new LoginController(null, null, userRepository, userService);
         //WHEN

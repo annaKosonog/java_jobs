@@ -79,12 +79,13 @@ public interface SampleOffers {
                 "Unique url"
         );
     }
+
     default OfferDto aFirstCompany() {
         return allParametersWhereHaveNotId(
                 "Juthisho",
                 "Game position",
                 "much",
-                "Unique url"
+                "unique_url"
         );
     }
 
@@ -110,7 +111,7 @@ public interface SampleOffers {
 
         return allParametersOfTheOfferDto("7b3e02b3-6b1a-4e75-bdad-cef5b279b074",
                 "Cybersource",
-                "",
+                "   ",
                 "4k - 8k PLN",
                 "https://nofluffjobs.com/pl/job/software-engineer-mobile-m-f-d-cybersource-poznan-entavdpn");
     }

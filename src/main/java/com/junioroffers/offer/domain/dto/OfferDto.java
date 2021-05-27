@@ -3,12 +3,14 @@ package com.junioroffers.offer.domain.dto;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Builder
 @Getter
+@ToString
 @EqualsAndHashCode
 public class OfferDto implements Serializable {
 
@@ -22,15 +24,4 @@ public class OfferDto implements Serializable {
     private final String salary;
     @NotBlank(message = "{offerUrl.not.blank}")
     private final String offerUrl;
-
-
-    @Override
-    public String toString() {
-        return "OfferDto: " +
-                "id: " + id +
-                " companyName: " + companyName +
-                " position: " + position +
-                " salary: " + salary  +
-                " offerUrl: " + offerUrl;
-    }
 }

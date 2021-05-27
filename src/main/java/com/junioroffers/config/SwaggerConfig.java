@@ -3,7 +3,6 @@ package com.junioroffers.config;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
@@ -26,9 +25,8 @@ public class SwaggerConfig {
     @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .ignoredParameterTypes(UsernamePasswordAuthenticationToken.class)
                 .select()
-                .paths(PathSelectors. regex ( "^(?!/(error).*$).*$" ))
+                .paths(PathSelectors.regex("^(?!/(error).*$).*$"))
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(singletonList(createSchema()))

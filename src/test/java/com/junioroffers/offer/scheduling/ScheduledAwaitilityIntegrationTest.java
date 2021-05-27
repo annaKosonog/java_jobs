@@ -40,7 +40,7 @@ public class ScheduledAwaitilityIntegrationTest {
         await()
                 .atMost(TEN_SECONDS)
                 .untilAsserted(
-                        () -> verify(offerClient, times(2)).getOffers());
+                        () -> verify(offerClient, times(1)).getOffers());
     }
 }
 

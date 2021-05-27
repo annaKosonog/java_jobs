@@ -6,6 +6,7 @@ import com.junioroffers.offer.domain.dto.SampleOffersDto;
 import com.junioroffers.offer.domain.exceptions.api.valid.ApiValidationResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,15 +22,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(OfferController.class)
 @ContextConfiguration(classes = MockMvcConfig.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class OfferPostControllerTestWebMvc implements SampleOffersDto {
 
     @Test
     void should_valid_request_returns_200_Ok(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
         //GIVEN
         OfferDto newOfferDto = cyberSourceDto();
-        String expected = objectMapper.writeValueAsString(newOfferDto);
+        final String expected = objectMapper.writeValueAsString(newOfferDto);
 
         //WHEN
         final MvcResult result = mockMvc.perform(post("/offers")
@@ -53,7 +55,6 @@ public class OfferPostControllerTestWebMvc implements SampleOffersDto {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(offerDtoJson))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andReturn();
     }
@@ -61,7 +62,7 @@ public class OfferPostControllerTestWebMvc implements SampleOffersDto {
     @Test
     void should_valid_request_and_return_code_http_400_bad_request_when_position_is_blank(@Autowired MockMvc mvc, @Autowired ObjectMapper objectMapper) throws Exception {
         //GIVEN
-        ApiValidationResponse apiValidationResponse = new ApiValidationResponse(HttpStatus.BAD_REQUEST, Collections.singletonList("{position.not.blank}"));
+        ApiValidationResponse apiValidationResponse = new ApiValidationResponse(HttpStatus.BAD_REQUEST, Collections.singletonList("Position may not be blank"));
         String expectedResponse = objectMapper.writeValueAsString(apiValidationResponse);
 
         final OfferDto offerDto = cyberSourceDtoWithoutPosition();
@@ -84,7 +85,7 @@ public class OfferPostControllerTestWebMvc implements SampleOffersDto {
     @Test
     void should_valid_request_and_return_code_http_400_bad_request_when_salary_is_blank(@Autowired MockMvc mvc, @Autowired ObjectMapper objectMapper) throws Exception {
         //GIVEN
-        ApiValidationResponse apiValidationResponse = new ApiValidationResponse(HttpStatus.BAD_REQUEST, Collections.singletonList("{salary.not.blank}"));
+        ApiValidationResponse apiValidationResponse = new ApiValidationResponse(HttpStatus.BAD_REQUEST, Collections.singletonList("Salary may not be blank"));
         String expectedResponse = objectMapper.writeValueAsString(apiValidationResponse);
 
         final OfferDto offerDto = cyberSourceDtoWithoutSalary();
@@ -107,7 +108,7 @@ public class OfferPostControllerTestWebMvc implements SampleOffersDto {
     @Test
     void should_valid_request_and_return_code_http_400_bad_request_when_offer_url_is_blank(@Autowired MockMvc mvc, @Autowired ObjectMapper objectMapper) throws Exception {
         //GIVEN
-        ApiValidationResponse apiValidationResponse = new ApiValidationResponse(HttpStatus.BAD_REQUEST, Collections.singletonList("{offerUrl.not.blank}"));
+        ApiValidationResponse apiValidationResponse = new ApiValidationResponse(HttpStatus.BAD_REQUEST, Collections.singletonList("Offer url may not be blank"));
         String expectedResponse = objectMapper.writeValueAsString(apiValidationResponse);
 
         final OfferDto offerDto = cyberSourceDtoWithoutOfferUrl();
