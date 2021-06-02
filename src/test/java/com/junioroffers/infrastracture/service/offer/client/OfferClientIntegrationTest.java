@@ -61,7 +61,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(aOneOfferJSON())));
-        then(remote.getOffers()).containsExactlyElementsOf(Collections.singletonList(aCybersource()));
+        then(remote.getOffers()).containsExactlyInAnyOrderElementsOf(Collections.singletonList(aCybersource()));
     }
 
     @Test
@@ -71,7 +71,7 @@ class OfferClientIntegrationTest extends SampleJobOffer {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(aTwoOffersJSON())));
-        then(remote.getOffers()).containsExactlyElementsOf(Arrays.asList(aCybersource(), aJuniorDevOpsEngineer()));
+        then(remote.getOffers()).containsExactlyInAnyOrderElementsOf(Arrays.asList(aCybersource(), aJuniorDevOpsEngineer()));
     }
 
     @Test

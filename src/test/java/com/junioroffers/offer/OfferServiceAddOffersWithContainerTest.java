@@ -44,7 +44,7 @@ public class OfferServiceAddOffersWithContainerTest implements SampleOffers {
         offerRepository.save(offerInTheDb);
 
         final OfferDto checkOfferDto = aFirstCompany();
-        then(offerRepository.existsByOfferUrl(checkOfferDto.getOfferUrl())).isFalse();
+        then(offerRepository.existsByOfferUrl("exist_url")).isTrue();
 
         //WHEN
         final OfferDto can_be_save = offerService.addOffers(checkOfferDto);

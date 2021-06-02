@@ -4,13 +4,16 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.junioroffers.offer.OfferRepository;
 import com.junioroffers.offer.domain.dao.Offer;
+import com.junioroffers.security.domain.User;
+import com.junioroffers.security.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 
 @ChangeLog(order = "1")
 public class DatabaseChangeLog {
 
-    @ChangeSet(order = "001", id = "dataBase", author = "Sai")
+    @ChangeSet(order = "001", id = "dataBase", author = "Sai", failFast = false)
     public void dataBase(OfferRepository offerRepository) {
         offerRepository.insert(Arrays.asList(cyberSource(), cdqPoland()));
     }
@@ -33,5 +36,13 @@ public class DatabaseChangeLog {
         cdqSource.setSalary("8k - 14k PLN");
         cdqSource.setCompanyName("CDQ Poland");
         return cdqSource;
+    }
+
+    @ChangeSet(order = "002", id = "addUserToDb", author = "Sai", failFast = false)
+    public void addUserToDb(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        final User user = new User();
+        user.setUsername("admin");
+       user.setPassword(passwordEncoder.encode("admin"));
+        userRepository.save(user);
     }
 }

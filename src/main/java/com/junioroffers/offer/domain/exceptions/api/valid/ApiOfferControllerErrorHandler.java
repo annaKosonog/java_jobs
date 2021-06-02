@@ -21,7 +21,7 @@ public class ApiOfferControllerErrorHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ApiValidationResponse offersBadRequest(MethodArgumentNotValidException ex) {
-        List<String> message = getResponse(ex);
+        final List<String> message = getResponse(ex);
         log.info("Bad Request: {}", ex.getMessage());
         log.debug("Bad Request: ", ex);
         return new ApiValidationResponse(HttpStatus.BAD_REQUEST, message);

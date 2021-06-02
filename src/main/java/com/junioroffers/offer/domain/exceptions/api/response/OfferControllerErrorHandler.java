@@ -19,7 +19,7 @@ public class OfferControllerErrorHandler {
     public OfferErrorResponse offersNotFoundHandler(OfferNotFoundException exception) {
         String message = "Could not find offers id: " + exception.getInfoRequestId();
         log.info(message);
-        log.error("500 Status Code", exception);
+        log.error("404 Status Code", exception);
         return new OfferErrorResponse(HttpStatus.NOT_FOUND, message);
     }
 
