@@ -7,6 +7,7 @@ import com.junioroffers.security.jwt.JwtUtils;
 import com.junioroffers.security.services.UserDetailsImp;
 import com.junioroffers.security.services.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class LoginController {
 
     private final JwtUtils jwtUtils;
@@ -31,7 +33,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
-        System.out.println("---------------------------- auth 1 -------- ");
+        log.info("------------ auth 1 -------- ");
 
 
         Authentication authentication = authenticationManager.authenticate(
@@ -41,7 +43,7 @@ public class LoginController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtUtils.generateJwtToken(authentication);
-        System.out.println("Bearer " + jwt);
+        log.info("Bearer " + jwt);
         UserDetailsImp userDetails = (UserDetailsImp) authentication.getPrincipal();
 
         return ResponseEntity.ok(new JwtResponse(jwt,

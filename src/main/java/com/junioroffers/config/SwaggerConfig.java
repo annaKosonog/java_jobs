@@ -33,7 +33,7 @@ public class SwaggerConfig {
                 .securityContexts(singletonList(createContext()));
     }
 
-    private List<SecurityReference> createRef() {
+    private static final List<SecurityReference> createRef() {
         AuthorizationScope authorizationScope = new AuthorizationScope(
                 "global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
@@ -41,14 +41,14 @@ public class SwaggerConfig {
         return singletonList(new SecurityReference("apiKey", authorizationScopes));
     }
 
-    private SecurityContext createContext() {
+    private  static final SecurityContext createContext() {
         return SecurityContext.builder()
                 .securityReferences(createRef())
                 .forPaths(PathSelectors.any())
                 .build();
     }
 
-    private SecurityScheme createSchema() {
+    private static final SecurityScheme createSchema() {
         return new ApiKey("apiKey", "Authorization", "header");
     }
 }
