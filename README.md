@@ -9,7 +9,9 @@ JAVA_JOBS - a job search application from various sources for aspiring Java deve
 * Docker 
 * Redis
 
-## Setup To run this project, install it locally using npm:
+## Setup 
+
+To run this project, install it locally using npm:
 
 $ cd ../java_jobs
 $ npm install
