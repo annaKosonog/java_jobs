@@ -13,6 +13,7 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,11 +47,13 @@ public class OfferServiceSaveAllOffersWithContainerTest implements SampleOffers,
                 "Two company",
                 "much");
 
-        final Offer existsWithDatabase = objectParametersWithoutId(
-                "Three company",
-                "junior test",
-                "343232",
-                "exists_url");
+        final Offer existsWithDatabase = Offer.builder()
+                .companyName("Three company")
+                .position("junior test")
+                .salary("343232")
+                .offerUrl("exists_url")
+                .build();
+
         offerRepository.save(existsWithDatabase);
         then(offerRepository.existsByOfferUrl(specialUrlTwo.getOfferUrl())).isTrue();
 

@@ -2,13 +2,16 @@ package com.junioroffers.offer.domain;
 
 import com.junioroffers.offer.OfferRepository;
 import com.junioroffers.offer.OfferService;
-import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dao.SampleOffers;
 import com.junioroffers.offer.domain.dto.OfferDto;
 import com.junioroffers.offer.domain.dto.SampleOffersDto;
 import com.junioroffers.offer.domain.exceptions.api.response.OfferNotFoundException;
 import com.junioroffers.offer.domain.mappers.OfferMapper;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,11 +28,14 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class OfferServiceTest implements SampleOffersDto, SampleOffers {
+@ExtendWith(value = MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+class OfferServiceTest implements SampleOffers, SampleOffersDto {
 
 
     OfferRepository offerRepository = mock(OfferRepository.class);
-    OfferService offerService = new OfferService(offerRepository);
+    OfferMapper offerMapper = mock(OfferMapper.class);
+    OfferService offerService = new OfferService(offerRepository, offerMapper);
 
     @Test
     void should_return_all_offers() {
@@ -38,7 +44,7 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
         //WHEN
         final List<OfferDto> allOffers = offerService.findAllOffers();
         //THEN
-        assertThat(allOffers).isEqualTo(Arrays.asList(cyberSourceDtoMapper(), cdqPolandDtoMapper()));
+        assertThat(allOffers).isEqualTo(Arrays.asList(cyberSourceDto(), cdqPolandDto()));
     }
 
     @Test
@@ -57,6 +63,7 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
         //GIVEN
         final String id = "7b3e02b3-6b1a-4e75-bdad-cef5b279b074";
         when(offerRepository.findById(id)).thenReturn(Optional.of(cyberSourceDao()));
+        when(offerMapper.mapToOfferDto(cyberSourceDao())).thenReturn(cyberSourceDto());
         //WHEN
         final OfferDto actual = offerService.findOfferById(id);
         //THEN
@@ -72,6 +79,7 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
         //GIVEN
         final String id = "24ee32b6-6b15-11eb-9439-0242ac130002";
         when(offerRepository.findById(id)).thenReturn(Optional.of(cdqPolandDao()));
+        when(offerMapper.mapToOfferDto(cdqPolandDao())).thenReturn(cdqPolandDto());
         //WHEN
         final OfferDto actual = offerService.findOfferById(id);
         //THEN
@@ -94,31 +102,15 @@ public class OfferServiceTest implements SampleOffersDto, SampleOffers {
     }
 
     @Test
-    void should_return_correctly_parsed_object() {
-        //GIVEN
-        final OfferDto expectedResponse = cyberSourceDtoWithoutId();
-        //WHEN
-        final Offer fromOffer = OfferMapper.mapFromOffer(expectedResponse);
-        final OfferDto actualResponse = OfferMapper.mapToOfferDto(fromOffer);
-        //THEN
-        assertThat(actualResponse).isEqualTo(expectedResponse);
-    }
-
-    @Test
     void should_add_an_offer_to_the_database() {
         //GIVEN
-        final Offer beforeSaveDb = objectParametersWithoutId("Neptun",
-                "Java Devops", "much", "url");
-        final Offer saveDb = allParametersOfTheObject("123e", "Neptun",
-                "Java Devops", "much", "url");
-        final OfferDto afterSaveDb = allParametersOfTheOfferDto("123e", "Neptun",
-                "Java Devops", "much", "url");
-        when(offerRepository.save(beforeSaveDb)).thenReturn(saveDb);
+        when(offerMapper.mapFromOffer(aFirstCompanyDto())).thenReturn(aFirstCompanyWithoutId());
+        when(offerRepository.save(aFirstCompanyWithoutId())).thenReturn(aFirstCompany());
+        when(offerMapper.mapToOfferDto(aFirstCompany())).thenReturn(aFirstCompanyDto());
         // WHEN
-        final OfferDto actual = offerService.addOffers(afterSaveDb);
+        final OfferDto actual = offerService.addOffers(aFirstCompanyDto());
         //THEN
-        assertThat(actual).isEqualTo(afterSaveDb);
+        assertThat(actual).isEqualTo(aFirstCompanyDto());
         verify(offerRepository, times(1)).save(any());
-
     }
 }

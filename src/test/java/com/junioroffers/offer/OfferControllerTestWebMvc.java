@@ -8,6 +8,7 @@ import com.junioroffers.offer.domain.exceptions.api.response.OfferControllerErro
 import com.junioroffers.offer.domain.exceptions.api.response.OfferErrorResponse;
 import com.junioroffers.offer.domain.exceptions.api.response.SampleOfferNotFoundException;
 import com.junioroffers.offer.domain.exceptions.api.valid.ApiOfferControllerErrorHandler;
+import com.junioroffers.offer.domain.mappers.OfferMapper;
 import com.junioroffers.security.config.SecurityConfig;
 import com.junioroffers.security.jwt.JwtTestConfig;
 import org.junit.jupiter.api.Test;
@@ -36,9 +37,8 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
 
     @Test
     void should_return_correct_message_during_found_all_offers(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
-        final List<OfferDto> responseHttp = Arrays.asList(cyberSourceDtoMapper(), cdqPolandDtoMapper());
+        final List<OfferDto> responseHttp = Arrays.asList(cyberSourceDto(), cdqPolandDto());
         String expectedResponse = objectMapper.writeValueAsString(responseHttp);
-
 
         MvcResult result = mockMvc.perform(get("/offers")
                 .accept(MediaType.APPLICATION_JSON))
@@ -53,25 +53,27 @@ public class OfferControllerTestWebMvc implements SampleOffersDto {
     @Test
     void should_return_correct_message_during_found_offer_with_id(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
         final String id = "7b3e02b3-6b1a-4e75-bdad-cef5b279b074";
-        String expectedResponse = objectMapper.writeValueAsString(cyberSourceDtoMapper());
+        String expectedResponse = objectMapper.writeValueAsString(cyberSourceDto());
 
         MvcResult result = mockMvc.perform(get("/offers/{id}", id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
+
         String actualResponseBody = result.getResponse().getContentAsString();
         assertThat(actualResponseBody.equals(expectedResponse));
-
     }
 
     @Test
     void should_return_exception_when_could_not_found_offer_with_id_five(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper) throws Exception {
-        final String ID = "100";
-        OfferErrorResponse offerErrorResponse = new OfferErrorResponse(HttpStatus.NOT_FOUND, "Could not find offers id: " + ID);
+        final String id = "5";
+        OfferErrorResponse offerErrorResponse = new OfferErrorResponse(HttpStatus.NOT_FOUND, "Could not find offers id: " + id);
         String expectedResponse = objectMapper.writeValueAsString(offerErrorResponse);
 
-        final MvcResult result = mockMvc.perform(get("/offers/{id}", ID))
+        MvcResult result = mockMvc.perform(get("/offers/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isNotFound())
                 .andReturn();
 
@@ -86,18 +88,21 @@ class MockMvcConfig implements SampleOffersDto, SampleOfferNotFoundException {
     @Bean
     OfferService offerService() {
         OfferRepository offerRepository = mock(OfferRepository.class);
-        return new OfferService(offerRepository) {
+        OfferMapper offerMapper = mock(OfferMapper.class);
+        return new OfferService(offerRepository, offerMapper) {
+            @Override
             public OfferDto findOfferById(String id) {
                 if (id.equals("7b3e02b3-6b1a-4e75-bdad-cef5b279b074")) {
-                    return cyberSourceDtoMapper();
+                    return cyberSourceDto();
                 } else if (id.equals("24ee32b6-6b15-11eb-9439-0242ac130002")) {
-                    return cdqPolandDtoMapper();
+                    return cdqPolandDto();
                 }
                 throw sampleOfferNotFoundException(id);
             }
 
+            @Override
             public OfferDto addOffers(OfferDto offerDto) {
-                return cyberSourceDtoMapper();
+                return cyberSourceDto();
             }
         };
     }
