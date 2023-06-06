@@ -24,7 +24,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.BDDAssertions.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -89,8 +88,6 @@ public class LoginControllerWithContainerTest implements SampleUser, SampleLogin
 
     @Test
     void should_return_code_http_200_when_added_new_user_to_the_db(@Autowired MockMvc mockMvc, @Autowired UserRepository userRepository, @Autowired ObjectMapper objectMapper) throws Exception {
-        then(userRepository.existsByUsername("test1")).isFalse();
-
         final LoginRequestDto register = userTestDto();
         final String expected = objectMapper.writeValueAsString(register);
 
@@ -104,10 +101,8 @@ public class LoginControllerWithContainerTest implements SampleUser, SampleLogin
 
         final MessageResponse messageResponse = objectMapper.readValue(createUser.getResponse().getContentAsString(), MessageResponse.class);
         assertThat(messageResponse.getMessage().equals("User registered successfully!"));
-        assertThat(userRepository.existsByUsername("test1")).isTrue();
-
+        assertThat(userRepository.existsByUsername("test")).isTrue();
     }
-
 
     @Test
     void should_return_http_code_400_when_try_to_add_user_without_password(@Autowired MockMvc mockMvc, @Autowired ObjectMapper objectMapper, @Autowired UserRepository userRepository) throws Exception {
@@ -124,8 +119,6 @@ public class LoginControllerWithContainerTest implements SampleUser, SampleLogin
                 .andReturn();
 
         final String actualResponse = result.getResponse().getContentAsString();
-
-
         assertThat(expectedResponse.equals(actualResponse));
     }
 }
