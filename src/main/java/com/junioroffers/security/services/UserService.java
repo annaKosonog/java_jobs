@@ -1,8 +1,8 @@
 package com.junioroffers.security.services;
 
+import com.junioroffers.security.UserRepository;
 import com.junioroffers.security.domain.LoginRequestDto;
 import com.junioroffers.security.domain.User;
-import com.junioroffers.security.UserRepository;
 import com.junioroffers.security.exception.api.response.UserExistsByUsername;
 import com.junioroffers.security.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;

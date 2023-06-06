@@ -3,36 +3,24 @@ package com.junioroffers.offer.domain.mappers;
 import com.junioroffers.infrastracture.model.dto.JobOfferDto;
 import com.junioroffers.offer.domain.dao.Offer;
 import com.junioroffers.offer.domain.dto.OfferDto;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
 
-@Component
-public class OfferMapper {
+@Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+public interface OfferMapper {
 
-    public static OfferDto mapToOfferDto(Offer from) {
-        return OfferDto.builder()
-                .id(from.getId())
-                .companyName(from.getCompanyName())
-                .position(from.getPosition())
-                .salary(from.getSalary())
-                .offerUrl(from.getOfferUrl())
-                .build();
-    }
+    OfferMapper INSTANCE = Mappers.getMapper(OfferMapper.class);
 
-    public static Offer mapToOffer(JobOfferDto to) {
-        return Offer.builder()
-                .companyName(to.getCompany())
-                .position(to.getTitle())
-                .salary(to.getSalary())
-                .offerUrl(to.getOfferUrl())
-                .build();
-    }
 
-    public static Offer mapFromOffer(OfferDto from) {
-        return Offer.builder()
-                .companyName(from.getCompanyName())
-                .position(from.getPosition())
-                .salary(from.getSalary())
-                .offerUrl(from.getOfferUrl())
-                .build();
-    }
+    OfferDto mapToOfferDto(Offer from);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "companyName", source = "to.company")
+    @Mapping(target = "position", source = "to.title")
+    Offer mapToOffer(JobOfferDto to);
+
+    @Mapping(target = "id", ignore = true)
+    Offer mapFromOffer(OfferDto from);
 }

@@ -2,21 +2,24 @@ package com.junioroffers.security.mappers;
 
 import com.junioroffers.security.domain.LoginRequestDto;
 import com.junioroffers.security.domain.User;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Component
-@RequiredArgsConstructor
-public class UserMapper {
+@Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+public interface UserMapper {
 
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    private final PasswordEncoder passwordEncoder;
+    @Mapping(target = "password", qualifiedByName = "encodePassword")
+    User mapToUser(LoginRequestDto loginRequestDto);
 
-
-    public User mapToUser(LoginRequestDto loginRequestDto) {
-        return new User(
-                loginRequestDto.getUsername(),
-                passwordEncoder.encode(loginRequestDto.getPassword()));
+    @Named("encodePassword")
+    default String encodePassword(String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.encode(password);
     }
 }

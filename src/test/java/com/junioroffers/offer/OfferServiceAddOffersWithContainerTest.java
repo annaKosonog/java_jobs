@@ -37,13 +37,21 @@ public class OfferServiceAddOffersWithContainerTest implements SampleOffers {
     void should_save_offers_in_database_when_url_is_unique(@Autowired OfferRepository offerRepository,
                                                            @Autowired OfferService offerService) {
         //GIVEN
-        final Offer offerInTheDb = objectParametersWithoutId("Skarbek",
-                "Game",
-                "much",
-                "exist_url");
+        final Offer offerInTheDb = Offer.builder()
+                .companyName("Skarbek")
+                .position("Game")
+                .salary("much")
+                .offerUrl("exist_url")
+                .build();
+
         offerRepository.save(offerInTheDb);
 
-        final OfferDto checkOfferDto = aFirstCompany();
+        final OfferDto checkOfferDto = OfferDto.builder()
+                .companyName("Skarbek")
+                .position("Game")
+                .salary("much")
+                .offerUrl("unique_url")
+                .build();
         then(offerRepository.existsByOfferUrl("exist_url")).isTrue();
 
         //WHEN
@@ -61,17 +69,21 @@ public class OfferServiceAddOffersWithContainerTest implements SampleOffers {
 
                                                                          @Autowired OfferService offerService) {
         //GIVEN
-        final OfferDto checkOfferDto = allParametersWhereHaveNotId("Juthisho",
-                "Game position",
-                "much",
-                "no_unique_url");
+        final OfferDto checkOfferDto = OfferDto.builder()
+                .companyName("Juthisho")
+                .position("Game position")
+                .salary("much")
+                .offerUrl("no_unique_url")
+                .build();
         then(offerRepository.existsByOfferUrl(checkOfferDto.getOfferUrl())).isFalse();
         final OfferDto saveOfferDtoToDb = offerService.addOffers(checkOfferDto);
 
-        final OfferDto noSave = allParametersWhereHaveNotId("Juthisho",
-                "Game position",
-                "much",
-                "no_unique_url");
+        final OfferDto noSave = OfferDto.builder()
+                .companyName("Juthisho")
+                .position("Game position")
+                .salary("much")
+                .offerUrl("no_unique_url")
+                .build();
 
         //WHEN
         Throwable thrown = catchThrowable(() -> offerService.addOffers(noSave));

@@ -1,8 +1,11 @@
 package com.junioroffers.offer.domain.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
@@ -10,18 +13,21 @@ import java.io.Serializable;
 
 @Builder
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class OfferDto implements Serializable {
 
     private static final long serialVersionUID = -4856846361193249489L;
-    private final String id;
+    private String id;
     @NotBlank(message = "{companyName.not.blank}")
-    private final String companyName;
+    private String companyName;
     @NotBlank(message = "{position.not.blank}")
-    private final String position;
+    private String position;
     @NotBlank(message = "{salary.not.blank}")
-    private final String salary;
+    private String salary;
     @NotBlank(message = "{offerUrl.not.blank}")
-    private final String offerUrl;
+    private String offerUrl;
 }
