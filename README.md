@@ -1,18 +1,27 @@
-# General info
+# Java_jobs
 
-JAVA_JOBS - a job search application from various sources for aspiring Java developers, based on Spring, MongoDB and Docker containers.
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Setup](#setup)
 
-## Technologies
+# General info:
 
-* Spring 
+The JAVA_JOBS application is a program that is mainly intended for finding jobs for Junior Java Developers. The found job offers are saved to the MongoDb database. 
+When using JSON Web Token, only an authenticated user will have access to our application.
+
+## Technologies:
+
+* Java
+* Spring Boot
 * MongoDb
 * Docker 
-* Redis
 
-## Setup 
+## Setup:
 
 To run this project, install it locally using npm:
-``````````````````````````````````````````````````
+
+`````````````````````
 $ cd ../java_jobs
-$ npm install
-$ npm start
+$  mvn clean install
+`````````````````````
